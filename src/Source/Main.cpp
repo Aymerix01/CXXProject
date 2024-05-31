@@ -2,6 +2,6 @@
 
 int main()
 {
-	Game game;
+	Game game(std::string("Toto"));
     game.run();
 }

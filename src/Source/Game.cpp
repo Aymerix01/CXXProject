@@ -4,7 +4,8 @@
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game()
+Game::Game(const std::string &playerName) :
+	mPlayer(playerName)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -14,6 +15,7 @@ Game::Game()
 
 void Game::run()
 {
+	start();
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
@@ -33,6 +35,11 @@ void Game::run()
 	}
 }
 
+void Game::start()
+{
+	//TODO: Implement the start method
+}
+
 void Game::processEvents()
 {
     sf::Event event{sf::Event::Count}; // Initialization to an impossible value (in order to suppress Clang-Tidy warning)
@@ -40,6 +47,7 @@ void Game::processEvents()
 	{
 		switch (event.type)
 		{
+			/*
 			case sf::Event::KeyPressed:
 				mTarget.handlePlayerInput(event.key.code, true);
 				break;
@@ -54,20 +62,20 @@ void Game::processEvents()
 
             default:
                 // We simply ignore all other events
-                break;
+                break;*/
 		}
 	}
 }
 
 void Game::update(sf::Time elapsedTime)
 {
-    mTarget.update(elapsedTime);
+    //TODO: Implement the update method
 }
 
 void Game::render()
 {
 	mWindow.clear();
-    mTarget.drawCurrent(mWindow);
+    //TODO: Implement the render method
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
 }

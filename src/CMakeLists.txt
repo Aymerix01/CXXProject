@@ -1,8 +1,7 @@
 add_executable(simpleGame
-  Source/Game.cpp Source/Main.cpp
-        Source/RoundTarget.cpp
-        Source/RoundTarget.cpp
-)
+  Source/Game.cpp 
+  Source/Main.cpp
+ "Include/Deck.h" "Include/Player.h" "Include/Card.h" "Source/Player.cpp" "Source/Deck.cpp" "Source/Card.cpp")
 
 target_include_directories(simpleGame
  PRIVATE
