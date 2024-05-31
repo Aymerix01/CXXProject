@@ -1,4 +1,5 @@
 #include "Deck.h"
+#include <pugixml.hpp>
 
 Deck::Deck()
 {

@@ -1,7 +1,8 @@
 #include "Game.hpp"
 
-int main()
+int myMain()
 {
 	Game game(std::string("Toto"));
     game.run();
+	return 0;
 }
