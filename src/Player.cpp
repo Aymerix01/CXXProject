@@ -47,7 +47,7 @@ void Player::showHand() const
 */
 void Player::playCard(int index, Deck& deck)
 {
-	hand[index]->play();
+	hand[index]->play(deck);
 	hand.erase(hand.begin() + index);
 }
 
@@ -57,7 +57,27 @@ void Player::playCard(int index, Deck& deck)
 */
 bool Player::hasLost() const
 {
-	//TODO: Implement this function
+	bool getExplodingCard = false;
+	bool getDefuseCard = false;
+	for (const auto& card : hand)
+	{
+		if (card->getClassType() == "ExplodingCard")
+		{
+			getExplodingCard = true;
+		}
+		if (card->getClassType() == "DefuseCard")
+		{
+			getDefuseCard = true;
+		}
+		if (getExplodingCard && getDefuseCard)
+		{
+			return false;
+		}
+	}
+	if (getExplodingCard && !getDefuseCard)
+	{
+		return true;
+	}
 	return false;
 }
 

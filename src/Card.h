@@ -4,16 +4,17 @@
 #include <pugixml.hpp>
 #include <memory>
 
-class Player;
+class Deck;
 class Card
 {
-protected:
+private:
 	std::string name;
 
 public:
 	explicit Card(const pugi::xml_node& node);
-	virtual void play() = 0;
+	virtual void play(Deck& deck) = 0;
 	virtual std::string getName() const;
+	virtual std::string getClassType() const = 0;
 
 	virtual ~Card() = default;
 };
