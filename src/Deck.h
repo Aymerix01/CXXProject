@@ -13,6 +13,7 @@ private:
 public:
 	explicit Deck(const pugi::xml_node& node);
 	void buildCard(const pugi::xml_node& node);
+	std::string dump() const;
 	void shuffle();
 	std::unique_ptr<Card> drawCard();
 	void addCardToRandom(std::unique_ptr<Card> card);

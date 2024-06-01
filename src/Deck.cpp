@@ -36,6 +36,19 @@ void Deck::buildCard(const pugi::xml_node& node)
 }
 
 /**
+* \brief Dump the deck
+* \return string
+*/
+string Deck::dump() const
+{
+	string res;
+	for (const auto& card : cards) {
+		res += card->getName() + "\n";
+	}
+	return res;
+}
+
+/**
 * \brief Shuffle the deck
 */
 void Deck::shuffle()
