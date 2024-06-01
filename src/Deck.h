@@ -15,7 +15,7 @@ public:
 	void buildCard(const pugi::xml_node& node);
 	void shuffle();
 	std::unique_ptr<Card> drawCard();
-	void addCardToEnd(std::unique_ptr<Card> card);
-	std::vector<std::unique_ptr<Card>> showSomeCards(int nbCards);
+	void addCardToRandom(std::unique_ptr<Card> card);
+	std::vector<Card*> showSomeCards(int nbCards);
 	bool empty() const;
 };

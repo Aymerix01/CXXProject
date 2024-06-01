@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/**
+* \brief Constructor of the Deck class
+* \param node : pugi::xml_node
+*/
 Deck::Deck(const pugi::xml_node& node)
 {
 	pugi::xml_node n = node.first_child();
@@ -16,6 +20,10 @@ Deck::Deck(const pugi::xml_node& node)
 	}
 }
 
+/**
+* \brief Add a card to the deck
+* \param node : pugi::xml_node
+*/
 void Deck::buildCard(const pugi::xml_node& node)
 {
 	if (string(node.name()) == "ExplodingCard") {
@@ -27,6 +35,9 @@ void Deck::buildCard(const pugi::xml_node& node)
 	}
 }
 
+/**
+* \brief Shuffle the deck
+*/
 void Deck::shuffle()
 {
 	std::random_device rd;
@@ -35,26 +46,63 @@ void Deck::shuffle()
 	std::ranges::shuffle(cards.begin(), cards.end(), g);
 }
 
+/**
+* \brief Draw the last card from the deck (cards.back())
+* \return unique_ptr<Card>
+*/
 unique_ptr<Card> Deck::drawCard()
 {
-	//TODO: Implement the draw method
+	if (!cards.empty()) {
+		auto card = move(cards.back());
+		cards.pop_back();
+		return card;
+	}
 	return nullptr;
 }
 
-void Deck::addCardToEnd(unique_ptr<Card> card)
+/**
+* \brief Add a card to the deck at a random position
+* \param card : unique_ptr<Card>
+*/
+void Deck::addCardToRandom(unique_ptr<Card> card)
 {
-	//TODO: Implement the addCardToEnd method
+	if (cards.empty()) {
+		cards.push_back(move(card));
+	}
+	else {
+		std::random_device rd;
+		std::mt19937 g(rd());
+		std::uniform_int_distribution dist(0, static_cast<int>(cards.size()) - 1);
+		cards.insert(cards.begin() + dist(g), move(card));
+	}
 }
 
-vector<unique_ptr<Card>> Deck::showSomeCards(int nbCards)
+/**
+* \brief Show the nbCards first cards of the deck
+* \param card : unique_ptr<Card>
+* \return vector<Card*> : vector of observed cards
+*/
+vector<Card*> Deck::showSomeCards(int nbCards)
 {
-	//TODO: Implement the showSomeCards method
-	return vector<unique_ptr<Card>>();
+	if (!cards.empty()) {
+		vector<Card*> res;
+		for (int i = 0; i < nbCards; i++) {
+			res.push_back(cards[i].get());
+		}
+		return res;
+	}
+	return vector<Card*>();
 }
 
+/**
+* \brief Show if the deck is empty
+* \return bool
+*/
 bool Deck::empty() const
 {
-	//TODO: Implement the empty method
+	if (cards.empty()) {
+		return true;
+	}
 	return false;
 }
 
