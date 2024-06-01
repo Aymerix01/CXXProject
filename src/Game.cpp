@@ -1,5 +1,6 @@
 #include "Game.hpp"
 #include "StringHelpers.hpp"
+#include <iostream>
 
 using namespace std;
 
@@ -38,7 +39,12 @@ void Game::run()
 
 void Game::start()
 {
-	//TODO: Implement the start method
+	deck.shuffle();
+	for (int i = 0; i < nbCardPlayerinitial; i++)
+	{
+		mPlayer.drawCard(deck);
+	}
+	mPlayer.showHand();
 }
 
 void Game::processEvents()

@@ -18,7 +18,6 @@ private:
 	void render();
 	void updateStatistics(sf::Time elapsedTime);	
 
-
 	static const sf::Time	TimePerFrame;
 	sf::RenderWindow		mWindow{sf::VideoMode{640, 480}, "SFML Application", sf::Style::Close};
 	sf::Texture				mTexture;
@@ -26,6 +25,8 @@ private:
 	sf::Text				mStatisticsText;
 	sf::Time				mStatisticsUpdateTime;
 	std::size_t				mStatisticsNumFrames{0};
+
+	int nbCardPlayerinitial = 5;
 
 	Player mPlayer;
 	Deck deck;

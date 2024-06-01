@@ -7,3 +7,8 @@ Card::Card(const pugi::xml_node& node) :
 {
 }
 
+string Card::getName() const
+{
+	return name;
+}
+

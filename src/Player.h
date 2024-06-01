@@ -4,19 +4,20 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include "Deck.h"
 
 class Game;
-class Deck;
 class Player
 {
 private:
-	std::string playerName;
+	const std::string playerName;
 	int score = 0;
 	std::vector<std::unique_ptr<Card>> hand;
 
 public:
 	explicit Player(const std::string& name);
 	void drawCard(Deck& deck);
-	void playCard(std::unique_ptr<Card> card);
+	void showHand() const;
+	void playCard(int index, Deck& deck);
 	bool hasLost() const;
 };

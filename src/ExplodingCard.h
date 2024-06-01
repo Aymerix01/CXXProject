@@ -3,6 +3,7 @@
 #include "Card.h"
 #include <string>
 #include <pugixml.hpp>
+#include "Player.h"
 
 class ExplodingCard : public Card
 {

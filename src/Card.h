@@ -2,7 +2,9 @@
 
 #include <string>
 #include <pugixml.hpp>
+#include <memory>
 
+class Player;
 class Card
 {
 protected:
@@ -11,6 +13,7 @@ protected:
 public:
 	explicit Card(const pugi::xml_node& node);
 	virtual void play() = 0;
+	virtual std::string getName() const;
 
 	virtual ~Card() = default;
 };
