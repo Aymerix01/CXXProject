@@ -1,11 +1,12 @@
 #include "Game.hpp"
 #include "StringHelpers.hpp"
 
+using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const std::string &playerName) :
-	mPlayer(playerName)
+Game::Game(const string &playerName, const pugi::xml_node& node) :
+	mPlayer(playerName), deck(node)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);

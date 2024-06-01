@@ -2,13 +2,11 @@
 
 #include "Card.h"
 #include <string>
+#include <pugixml.hpp>
 
 class ExplodingCard : public Card
 {
-private:
-	std::string name;
-
 public:
-	explicit ExplodingCard(const std::string& name);
+	explicit ExplodingCard(const pugi::xml_node& node);
 	void play() override;
 };

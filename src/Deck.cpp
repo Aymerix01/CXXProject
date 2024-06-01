@@ -1,31 +1,55 @@
 #include "Deck.h"
-#include <pugixml.hpp>
+#include "ExplodingCard.h"
+#include <iostream>
+#include <algorithm>
+#include <random> 
 
-Deck::Deck()
+using namespace std;
+
+Deck::Deck(const pugi::xml_node& node)
 {
-	//TODO: Implement the Deck constructor
+	pugi::xml_node n = node.first_child();
+	buildCard(n);
+	while (n != node.last_child()) {
+		n = n.next_sibling();
+		buildCard(n);
+	}
+}
+
+void Deck::buildCard(const pugi::xml_node& node)
+{
+	if (string(node.name()) == "ExplodingCard") {
+		auto c = make_unique<ExplodingCard>(node);
+		cards.push_back(move(c));
+	}
+	else {
+		cerr << "Unknown card type: " << node.name() << endl;
+	}
 }
 
 void Deck::shuffle()
 {
-	//TODO: Implement the shuffle method
+	std::random_device rd;
+	std::mt19937 g(rd());
+
+	std::ranges::shuffle(cards.begin(), cards.end(), g);
 }
 
-std::unique_ptr<Card> Deck::drawCard()
+unique_ptr<Card> Deck::drawCard()
 {
 	//TODO: Implement the draw method
 	return nullptr;
 }
 
-void Deck::addCardToEnd(std::unique_ptr<Card> card)
+void Deck::addCardToEnd(unique_ptr<Card> card)
 {
 	//TODO: Implement the addCardToEnd method
 }
 
-std::vector<std::unique_ptr<Card>> Deck::showSomeCards(int nbCards)
+vector<unique_ptr<Card>> Deck::showSomeCards(int nbCards)
 {
 	//TODO: Implement the showSomeCards method
-	return std::vector<std::unique_ptr<Card>>();
+	return vector<unique_ptr<Card>>();
 }
 
 bool Deck::empty() const

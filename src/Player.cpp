@@ -1,7 +1,8 @@
 #include "Player.h"
 
+using namespace std;
 
-Player::Player(const std::string& name) : 
+Player::Player(const string& name) : 
 	playerName(name)
 {
 }
@@ -11,7 +12,7 @@ void Player::drawCard(Deck& deck)
 	//TODO: Implement the drawCard method
 }
 
-void Player::playCard(std::unique_ptr<Card> card)
+void Player::playCard(unique_ptr<Card> card)
 {
 	//TODO: Implement the playCard method
 }

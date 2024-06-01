@@ -8,7 +8,7 @@
 class Game : private sf::NonCopyable
 {
 public:
-	explicit Game(const std::string &playerName);
+	explicit Game(const std::string &playerName, const pugi::xml_node& node);
 	void run();
 		
 private:

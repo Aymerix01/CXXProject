@@ -1,12 +1,14 @@
 #include "ExplodingCard.h"
 #include <iostream>
 
-ExplodingCard::ExplodingCard(const std::string& name) :
-	name(name)
+using namespace std;
+
+ExplodingCard::ExplodingCard(const pugi::xml_node& node) : Card(node)
 {
+	cout << "Exploding card created: " << name << endl;
 }
 
 void ExplodingCard::play()
 {
-	std::cout << "Exploding card played: " << name << std::endl;
+	cout << "Exploding card played: " << name << endl;
 }
