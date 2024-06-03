@@ -2,22 +2,26 @@
 
 <root>
   <ExplodingCard name="Baby Boom"/>
-  <!-- Ajouter des cartes ici -->
-  <!--  La classe Happy Card n'est pas encore implémentée
-    <HappyCard name="Babycyclette"/>
-    <HappyCard name="Babysmillah"/>
-    <HappyCard name="Baby Shark"/>
-    <HappyCard name="Babystoury"/>
-    <HappyCard name="Babynouse"/>
-    <HappyCard name="Babygoody"/>
-    <HappyCard name="Babyfoot"/>
-    <HappyCard name="Babybell"/>
-    <HappyCard name="Babytcoin"/>
-    <HappyCard name="Babyvre"/>
-    <HappyCard name="Babybron"/>
-    <HappyCard name="Babyg Brother"/>
-    <HappyCard name="Babyscotte"/>
-    <HappyCard name="Babysounours"/>
-    <HappyCard name="Babysous"/>
-  -->
+  <DefuseCard name="Babysous"/>
+  <AttackCard name="Babyg Brother"/>
+  <SchuffleCard name="Babycyclette"/>
+  <FutureCard name="Babysmillah"/>
+  <HappyCard name="Baby Shark"/>
+  <HappyCard name="Babyfoot"/>
+  <HappyCard name="Babybell"/>
+  <HappyCard name="Babytcoin"/>
+  <HappyCard name="Babysounours"/>
+  <HappyCard name="Babybron"/>
+  <HappyCard name="Baby Shark"/>
+  <HappyCard name="Babyfoot"/>
+  <HappyCard name="Babybell"/>
+  <HappyCard name="Babytcoin"/>
+  <HappyCard name="Babysounours"/>
+  <HappyCard name="Babybron"/>
+  <HappyCard name="Baby Shark"/>
+  <HappyCard name="Babyfoot"/>
+  <HappyCard name="Babybell"/>
+  <HappyCard name="Babytcoin"/>
+  <HappyCard name="Babysounours"/>
+  <HappyCard name="Babybron"/>
 </root>
