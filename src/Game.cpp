@@ -49,19 +49,23 @@ void Game::start()
 
 void Game::processEvents()
 {
-    sf::Event event{sf::Event::Count}; // Initialization to an impossible value (in order to suppress Clang-Tidy warning)
+    sf::Event event{sf::Event::Count};
 	while (mWindow.pollEvent(event))
 	{
-		switch (event.type)
-		{
-			case sf::Event::Closed:
-				mWindow.close();
-				break;
+		userEvents(event);
+	}
+}
 
-            default:
-                // We simply ignore all other events
-                break;
-		}
+void Game::userEvents(sf::Event event)
+{
+	switch (event.type)
+	{
+		case sf::Event::Closed:
+			mWindow.close();
+			break;
+
+		default:
+			break;
 	}
 }
 

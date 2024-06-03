@@ -15,6 +15,7 @@ public:
 private:
 	void start();
 	void processEvents(); // Handle user input
+	void userEvents(sf::Event event);
 	void update(sf::Time elapsedTime);
 	void render();
 	void updateStatistics(sf::Time elapsedTime);	
