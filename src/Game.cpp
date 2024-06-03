@@ -6,8 +6,8 @@ using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const string &playerName, const pugi::xml_node& node) :
-	mPlayer(playerName), deck(node)
+Game::Game(const string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite) :
+	backgroundSprite(bgSprite), mPlayer(playerName), deck(node)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -54,22 +54,13 @@ void Game::processEvents()
 	{
 		switch (event.type)
 		{
-			/*
-			case sf::Event::KeyPressed:
-				mTarget.handlePlayerInput(event.key.code, true);
-				break;
-
-			case sf::Event::KeyReleased:
-                mTarget.handlePlayerInput(event.key.code, false);
-				break;
-
 			case sf::Event::Closed:
 				mWindow.close();
 				break;
 
             default:
                 // We simply ignore all other events
-                break;*/
+                break;
 		}
 	}
 }
@@ -82,6 +73,7 @@ void Game::update(sf::Time elapsedTime)
 void Game::render()
 {
 	mWindow.clear();
+	mWindow.draw(backgroundSprite);
     //TODO: Implement the render method
 	mWindow.draw(mStatisticsText);
 	mWindow.display();

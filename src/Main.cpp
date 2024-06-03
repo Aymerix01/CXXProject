@@ -16,7 +16,15 @@ int myMain()
 
     pugi::xml_node root = doc.child("root");
 
-	Game game(string("Toto"), root);
+    sf::Texture texture;
+    if (!texture.loadFromFile("resources/TemplatePlateau.png")) {
+        printf("Error loading texture\n");
+        return -1;
+    }
+    sf::Sprite sprite;
+    sprite.setTexture(texture);
+
+	Game game(string("Toto"), root, sprite);
     game.run();
 	return 0;
 }

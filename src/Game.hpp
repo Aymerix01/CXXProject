@@ -8,7 +8,7 @@
 class Game : private sf::NonCopyable
 {
 public:
-	explicit Game(const std::string &playerName, const pugi::xml_node& node);
+	explicit Game(const std::string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite);
 	void run();
 		
 private:
@@ -19,7 +19,7 @@ private:
 	void updateStatistics(sf::Time elapsedTime);	
 
 	static const sf::Time	TimePerFrame;
-	sf::RenderWindow		mWindow{sf::VideoMode{640, 480}, "SFML Application", sf::Style::Close};
+	sf::RenderWindow		mWindow{sf::VideoMode{1920, 1080}, "SFML Application", sf::Style::Close};
 	sf::Texture				mTexture;
 	sf::Font				mFont;
 	sf::Text				mStatisticsText;
@@ -27,6 +27,7 @@ private:
 	std::size_t				mStatisticsNumFrames{0};
 
 	int nbCardPlayerinitial = 5;
+	sf::Sprite backgroundSprite;
 
 	Player mPlayer;
 	Deck deck;
