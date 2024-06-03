@@ -6,8 +6,8 @@ using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite) :
-	backgroundSprite(bgSprite), mPlayer(playerName), deck(node)
+Game::Game(const string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite, const sf::Sprite& deckSprite) :
+	backgroundSprite(bgSprite), mPlayer(playerName), deck(node, deckSprite)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -74,6 +74,7 @@ void Game::render()
 {
 	mWindow.clear();
 	mWindow.draw(backgroundSprite);
+	deck.render(mWindow);
     //TODO: Implement the render method
 	mWindow.draw(mStatisticsText);
 	mWindow.display();

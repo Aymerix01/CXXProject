@@ -8,7 +8,8 @@
 class Game : private sf::NonCopyable
 {
 public:
-	explicit Game(const std::string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite);
+	explicit Game(const std::string &playerName, const pugi::xml_node& node, 
+				  const sf::Sprite& bgSprite, const sf::Sprite& deckSprite);
 	void run();
 		
 private:
@@ -27,6 +28,8 @@ private:
 	std::size_t				mStatisticsNumFrames{0};
 
 	int nbCardPlayerinitial = 5;
+	sf::Vector2f cardSize = sf::Vector2f(100, 150);
+	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
 	sf::Sprite backgroundSprite;
 
 	Player mPlayer;

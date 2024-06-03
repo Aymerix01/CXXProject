@@ -1,17 +1,15 @@
 #include "Deck.h"
-#include "ExplodingCard.h"
 #include <iostream>
 #include <algorithm>
 #include <random> 
+#include "ExplodingCard.h"
 
 using namespace std;
 
-/**
-* \brief Constructor of the Deck class
-* \param node : pugi::xml_node
-*/
-Deck::Deck(const pugi::xml_node& node)
+Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite) :
+	deckSprite(sprite)
 {
+	deckSprite.setPosition(deckPosition);
 	pugi::xml_node n = node.first_child();
 	buildCard(n);
 	while (n != node.last_child()) {
@@ -20,10 +18,6 @@ Deck::Deck(const pugi::xml_node& node)
 	}
 }
 
-/**
-* \brief Add a card to the deck
-* \param node : pugi::xml_node
-*/
 void Deck::buildCard(const pugi::xml_node& node)
 {
 	if (string(node.name()) == "ExplodingCard") {
@@ -35,10 +29,6 @@ void Deck::buildCard(const pugi::xml_node& node)
 	}
 }
 
-/**
-* \brief Dump the deck
-* \return string
-*/
 string Deck::dump() const
 {
 	string res;
@@ -48,9 +38,6 @@ string Deck::dump() const
 	return res;
 }
 
-/**
-* \brief Shuffle the deck
-*/
 void Deck::shuffle()
 {
 	std::random_device rd;
@@ -59,10 +46,6 @@ void Deck::shuffle()
 	std::ranges::shuffle(cards.begin(), cards.end(), g);
 }
 
-/**
-* \brief Draw the last card from the deck (cards.back())
-* \return unique_ptr<Card>
-*/
 unique_ptr<Card> Deck::drawCard()
 {
 	if (!cards.empty()) {
@@ -73,10 +56,6 @@ unique_ptr<Card> Deck::drawCard()
 	return nullptr;
 }
 
-/**
-* \brief Add a card to the deck at a random position
-* \param card : unique_ptr<Card>
-*/
 void Deck::addCardToRandom(unique_ptr<Card> card)
 {
 	if (cards.empty()) {
@@ -90,11 +69,6 @@ void Deck::addCardToRandom(unique_ptr<Card> card)
 	}
 }
 
-/**
-* \brief Show the nbCards first cards of the deck
-* \param card : unique_ptr<Card>
-* \return vector<Card*> : vector of observed cards
-*/
 vector<Card*> Deck::showSomeCards(int nbCards)
 {
 	if (!cards.empty()) {
@@ -107,15 +81,16 @@ vector<Card*> Deck::showSomeCards(int nbCards)
 	return vector<Card*>();
 }
 
-/**
-* \brief Show if the deck is empty
-* \return bool
-*/
 bool Deck::empty() const
 {
 	if (cards.empty()) {
 		return true;
 	}
 	return false;
+}
+
+void Deck::render(sf::RenderWindow& window) const
+{
+	window.draw(deckSprite);
 }
 

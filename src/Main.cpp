@@ -2,6 +2,7 @@
 #include <iostream>
 #include <pugixml.hpp>
 #include <string>
+#include "SFML/Graphics.hpp"
 
 using namespace std;
 
@@ -16,15 +17,23 @@ int myMain()
 
     pugi::xml_node root = doc.child("root");
 
-    sf::Texture texture;
-    if (!texture.loadFromFile("resources/TemplatePlateau.png")) {
+    sf::Texture texturePlateau;
+    if (!texturePlateau.loadFromFile("resources/TemplatePlateau.png")) {
         printf("Error loading texture\n");
         return -1;
     }
-    sf::Sprite sprite;
-    sprite.setTexture(texture);
+    sf::Sprite spritePlateau;
+    spritePlateau.setTexture(texturePlateau);
 
-	Game game(string("Toto"), root, sprite);
+    sf::Texture textureDosCarte;
+    if (!textureDosCarte.loadFromFile("resources/DosCarte.png")) {
+        printf("Error loading texture\n");
+        return -1;
+    }
+    sf::Sprite spriteDosCarte;
+    spriteDosCarte.setTexture(textureDosCarte);
+
+	Game game(string("Toto"), root, spritePlateau, spriteDosCarte);
     game.run();
 	return 0;
 }

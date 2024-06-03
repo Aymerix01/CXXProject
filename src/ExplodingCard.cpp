@@ -17,3 +17,7 @@ std::string ExplodingCard::getClassType() const
 {
 	return classType;
 }
+
+void ExplodingCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const {
+	//TODO: Implement render
+}

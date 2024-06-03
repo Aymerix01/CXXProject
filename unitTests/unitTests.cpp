@@ -18,22 +18,24 @@ bool isValueInList(const T& value, const std::vector<T>& list) {
 }
 
 TEST(Deck, Constructeur) {
+    sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-	Deck deck(root);
+	Deck deck(root, sprite);
 
     std::string expected = "Baby Boom\nDynamite\nTNT\n";
 	EXPECT_EQ(deck.dump(), expected);
 }
 
 TEST(Deck, showSomeCards) {
+    sf::Sprite sprite;
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_string(s.c_str());
 	ASSERT_TRUE(result) << result.description();
 	pugi::xml_node root = doc.child("root");
-	Deck deck(root);
+	Deck deck(root, sprite);
 
 	auto cards = deck.showSomeCards(3);
 	std::string expected = "Baby Boom\nDynamite\nTNT\n";
@@ -45,11 +47,12 @@ TEST(Deck, showSomeCards) {
 }
 
 TEST(Deck, shuffle) {
+    sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root);
+    Deck deck(root, sprite);
 
     deck.shuffle();
     std::vector<std::string> possibilities = { "Baby Boom\nDynamite\nTNT\n", 
@@ -63,11 +66,12 @@ TEST(Deck, shuffle) {
 }
 
 TEST(Deck, draw) {
+    sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root);
+    Deck deck(root, sprite);
 
     //On vérifie que la carte tirée est bien la première de la liste
     auto drawC = deck.drawCard()->getName();
@@ -80,11 +84,12 @@ TEST(Deck, draw) {
 }
 
 TEST(Deck, addCardToRandom) {
+    sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root);
+    Deck deck(root, sprite);
 
     const std::string xmlCard = R"(<?xml version = "1.0"?>
 						   <root>
@@ -105,11 +110,12 @@ TEST(Deck, addCardToRandom) {
 }
 
 TEST(Deck, empty) {
+    sf::Sprite sprite;
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_string(s.c_str());
 	ASSERT_TRUE(result) << result.description();
 	pugi::xml_node root = doc.child("root");
-	Deck deck(root);
+	Deck deck(root, sprite);
 
 	EXPECT_FALSE(deck.empty());
 	deck.drawCard();

@@ -1,21 +1,14 @@
 #include "Player.h"
 #include <iostream>
+#include <math.h>
 
 using namespace std;
 
-/**
-* \brief Constructor of the Player class
-* \param name : string
-*/
 Player::Player(const string& name) : 
 	playerName(name)
 {
 }
 
-/**
-* \brief Draw a card from the deck
-* \param deck : Deck&
-*/
 void Player::drawCard(Deck& deck)
 {
 	if(!deck.empty())
@@ -28,9 +21,6 @@ void Player::drawCard(Deck& deck)
 	}
 }
 
-/**
-* \brief Show the player's cards
-*/
 void Player::showHand() const
 {
 	int index = 0;
@@ -41,20 +31,12 @@ void Player::showHand() const
 	}
 }
 
-/**
-* \brief Play a card
-* \param card : unique_ptr<Card>
-*/
 void Player::playCard(int index, Deck& deck)
 {
 	hand[index]->play(deck);
 	hand.erase(hand.begin() + index);
 }
 
-/**
-* \brief Check if the player has lost
-* \return bool
-*/
 bool Player::hasLost() const
 {
 	bool getExplodingCard = false;
@@ -79,5 +61,18 @@ bool Player::hasLost() const
 		return true;
 	}
 	return false;
+}
+
+void Player::renderHand(sf::RenderWindow& window) const
+{
+	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 400), 715);
+	int index = 0;
+	for (const auto& card : hand)
+	{
+		card->render(window, position);
+		position.x += 400 / static_cast<float>(index + 1);
+		index++;
+
+	}
 }
 
