@@ -3,6 +3,12 @@
 #include <algorithm>
 #include <random> 
 #include "ExplodingCard.h"
+#include "ShuffleCard.h"
+#include "HappyCard.h"
+#include "AttackCard.h"
+#include "DefuseCard.h"
+#include "FutureCard.h"
+
 
 using namespace std;
 
@@ -18,10 +24,29 @@ Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite) :
 	}
 }
 
-void Deck::buildCard(const pugi::xml_node& node)
-{
+void Deck::buildCard(const pugi::xml_node& node) {
 	if (string(node.name()) == "ExplodingCard") {
 		auto c = make_unique<ExplodingCard>(node);
+		cards.push_back(move(c));
+	}
+	else if (string(node.name()) == "AttackCard") {
+		auto c = make_unique<AttackCard>(node);
+		cards.push_back(move(c));
+	}
+	else if (string(node.name()) == "DefuseCard") {
+		auto c = make_unique<DefuseCard>(node);
+		cards.push_back(move(c));
+	}
+	else if (string(node.name()) == "FutureCard") {
+		auto c = make_unique<FutureCard>(node);
+		cards.push_back(move(c));
+	}
+	else if (string(node.name()) == "ShuffleCard") {
+		auto c = make_unique<ShuffleCard>(node);
+		cards.push_back(move(c));
+	}
+	else if (string(node.name()) == "HappyCard") {
+		auto c = make_unique<HappyCard>(node);
 		cards.push_back(move(c));
 	}
 	else {
@@ -44,6 +69,19 @@ void Deck::shuffle()
 	std::mt19937 g(rd());
 
 	std::ranges::shuffle(cards.begin(), cards.end(), g);
+}
+
+string Deck::attack()
+{
+	if (!cards.empty()) {
+		auto card = move(cards.back());
+		auto str = card->getClassType();
+		cards.pop_back();
+		addCardToRandom(move(card));
+
+		return str;
+	}
+	return " ";
 }
 
 unique_ptr<Card> Deck::drawCard()
@@ -74,7 +112,7 @@ vector<Card*> Deck::showSomeCards(int nbCards)
 	if (!cards.empty()) {
 		vector<Card*> res;
 		for (int i = 0; i < nbCards; i++) {
-			res.push_back(cards[i].get());
+			res.push_back(cards[cards.size() - i -1].get());
 		}
 		return res;
 	}

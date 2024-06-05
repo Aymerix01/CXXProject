@@ -39,6 +39,12 @@ public:
 	*/
 	void playCard(int index, Deck& deck);
 
+	/*
+	* Dumps the players hand
+	*/
+	std::string dump() const;
+
+
 	/**
 	* \brief Check if the player has lost
 	* \return bool
@@ -50,4 +56,7 @@ public:
 	* \param window : sf::RenderWindow&
 	*/
 	void renderHand(sf::RenderWindow& window) const;
+
+	void addPoints(int points) { score += points; };
+	int getScore() const{ return score; };
 };

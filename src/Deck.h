@@ -7,6 +7,7 @@
 #include "Card.h"
 
 
+
 class Deck
 {
 private:
@@ -24,6 +25,7 @@ public:
 	/**
 	* \brief Add a card to the deck
 	* \param node : pugi::xml_node
+	* Factory Design Pattern
 	*/
 	void buildCard(const pugi::xml_node& node);
 
@@ -39,9 +41,16 @@ public:
 	void shuffle();
 
 	/**
+	* Puts the first card of the deck in the back
+	* if the card is a bomb then the player gains points
+	*/
+	std::string attack();
+
+	/**
 	* \brief Draw the last card from the deck (cards.back())
 	* \return unique_ptr<Card>
 	*/
+
 	std::unique_ptr<Card> drawCard();
 
 	/**

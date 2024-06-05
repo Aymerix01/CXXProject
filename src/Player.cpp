@@ -13,7 +13,8 @@ void Player::drawCard(Deck& deck)
 {
 	if(!deck.empty())
 	{ 
-		hand.push_back(deck.drawCard());
+		auto card = deck.drawCard();
+		hand.push_back(move(card));
 	}
 	else
 	{
@@ -31,9 +32,18 @@ void Player::showHand() const
 	}
 }
 
+string Player::dump() const
+{
+	string res;
+	for (const auto& card : hand) {
+		res += card->getName() + "\n";
+	}
+	return res;
+}
+
 void Player::playCard(int index, Deck& deck)
 {
-	hand[index]->play(deck);
+	addPoints(hand[index]->play(deck));
 	hand.erase(hand.begin() + index);
 }
 
@@ -43,6 +53,10 @@ bool Player::hasLost() const
 	bool getDefuseCard = false;
 	for (const auto& card : hand)
 	{
+		if (getExplodingCard && getDefuseCard)
+		{
+			return false;
+		}
 		if (card->getClassType() == "ExplodingCard")
 		{
 			getExplodingCard = true;
@@ -50,10 +64,6 @@ bool Player::hasLost() const
 		if (card->getClassType() == "DefuseCard")
 		{
 			getDefuseCard = true;
-		}
-		if (getExplodingCard && getDefuseCard)
-		{
-			return false;
 		}
 	}
 	if (getExplodingCard && !getDefuseCard)

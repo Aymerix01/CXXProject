@@ -3,14 +3,16 @@
 #include <string>
 #include <pugixml.hpp>
 #include "Card.h"
+#include "Deck.h"
+#include "Game.hpp"
 
 class Deck;
-class ExplodingCard : public Card
+class HappyCard : public Card
 {
 private:
-	std::string classType = "ExplodingCard";
+	std::string classType = "HappyCard";
 public:
-	explicit ExplodingCard(const pugi::xml_node& node);
+	explicit HappyCard(const pugi::xml_node& node);
 	int play(Deck& deck) override;
 	std::string getClassType() const override;
 	void render(sf::RenderWindow& window, const sf::Vector2f& position) const override;

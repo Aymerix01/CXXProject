@@ -5,6 +5,7 @@
 #include <pugixml.hpp>
 #include <memory>
 
+
 class Deck;
 class Card
 {
@@ -13,7 +14,7 @@ private:
 
 public:
 	explicit Card(const pugi::xml_node& node);
-	virtual void play(Deck& deck) = 0;
+	virtual int play(Deck& deck) = 0;
 	virtual std::string getName() const;
 	virtual std::string getClassType() const = 0;
 	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position) const = 0;
