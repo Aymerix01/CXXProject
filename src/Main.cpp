@@ -33,7 +33,9 @@ int myMain()
     sf::Sprite spriteDosCarte;
     spriteDosCarte.setTexture(textureDosCarte);
 
-	Game game(string("Toto"), root, spritePlateau, spriteDosCarte);
+    EventCardManager eventCardManager;
+
+	Game game(string("Toto"), root, spritePlateau, spriteDosCarte, eventCardManager);
     game.run();
 	return 0;
 }

@@ -6,13 +6,19 @@ using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const string &playerName, const pugi::xml_node& node, const sf::Sprite& bgSprite, const sf::Sprite& deckSprite) :
-	backgroundSprite(bgSprite), mPlayer(playerName), deck(node, deckSprite)
+Game::Game(const string &playerName, const pugi::xml_node& node, 
+		   const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
+			EventCardManager& eventCardManager) :
+backgroundSprite(bgSprite), eventCardManager(eventCardManager),
+mPlayer(playerName), deck(node, deckSprite, eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+
+	this->eventCardManager.addEventCardListener(&mPlayer);
+	this->eventCardManager.addEventCardListener(&deck);
 }
 
 void Game::run()

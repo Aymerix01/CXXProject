@@ -12,41 +12,41 @@
 
 using namespace std;
 
-Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite) :
+Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager) :
 	deckSprite(sprite)
 {
 	deckSprite.setPosition(deckPosition);
 	pugi::xml_node n = node.first_child();
-	buildCard(n);
+	buildCard(n, eventCardManager);
 	while (n != node.last_child()) {
 		n = n.next_sibling();
-		buildCard(n);
+		buildCard(n, eventCardManager);
 	}
 }
 
-void Deck::buildCard(const pugi::xml_node& node) {
+void Deck::buildCard(const pugi::xml_node& node, EventCardManager& eventCardManager) {
 	if (string(node.name()) == "ExplodingCard") {
-		auto c = make_unique<ExplodingCard>(node);
+		auto c = make_unique<ExplodingCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "AttackCard") {
-		auto c = make_unique<AttackCard>(node);
+		auto c = make_unique<AttackCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "DefuseCard") {
-		auto c = make_unique<DefuseCard>(node);
+		auto c = make_unique<DefuseCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "FutureCard") {
-		auto c = make_unique<FutureCard>(node);
+		auto c = make_unique<FutureCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "ShuffleCard") {
-		auto c = make_unique<ShuffleCard>(node);
+		auto c = make_unique<ShuffleCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "HappyCard") {
-		auto c = make_unique<HappyCard>(node);
+		auto c = make_unique<HappyCard>(node, eventCardManager);
 		cards.push_back(move(c));
 	}
 	else {
@@ -132,3 +132,6 @@ void Deck::render(sf::RenderWindow& window) const
 	window.draw(deckSprite);
 }
 
+void Deck::onEventCard() {
+	//TODO : implement onEventCard
+}

@@ -5,10 +5,11 @@
 #include <string>
 #include <memory>
 #include "Deck.h"
+#include "EventCardListener.h"
 
 class Card;
 class Game;
-class Player
+class Player : public EventCardListener
 {
 private:
 	const std::string playerName;
@@ -37,7 +38,7 @@ public:
 	* \brief Play a card
 	* \param card : unique_ptr<Card>
 	*/
-	void playCard(int index, Deck& deck);
+	void playCard(int index);
 
 	/*
 	* Dumps the players hand
@@ -59,4 +60,5 @@ public:
 
 	void addPoints(int points) { score += points; };
 	int getScore() const{ return score; };
+	void onEventCard() override;
 };

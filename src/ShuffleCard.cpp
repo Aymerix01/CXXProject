@@ -3,16 +3,14 @@
 
 using namespace std;
 
-ShuffleCard::ShuffleCard(const pugi::xml_node& node) : Card(node)
+ShuffleCard::ShuffleCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Shuffle card created: " << node.attribute("name").as_string() << endl;
 }
 
-int ShuffleCard::play(Deck& deck)
+void ShuffleCard::play()
 {
 	cout << "Shuffle card played: " << getName() << endl;
-	deck.shuffle();
-	return 0;
 }
 
 std::string ShuffleCard::getClassType() const
@@ -24,3 +22,4 @@ void ShuffleCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
 {
 	//TODO Render
 }
+

@@ -5,14 +5,15 @@
 #include "Card.h"
 #include "Deck.h"
 
+
 class Deck;
 class AttackCard : public Card
 {
 private:
 	std::string classType = "AttackCard";
 public:
-	explicit AttackCard(const pugi::xml_node& node);
-	int play(Deck& deck) override;
+	explicit AttackCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
+	void play() override;
 	std::string getClassType() const override;
 	void render(sf::RenderWindow& window, const sf::Vector2f& position) const override;
 };

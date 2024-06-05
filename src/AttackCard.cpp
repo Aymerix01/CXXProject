@@ -3,22 +3,14 @@
 
 using namespace std;
 
-AttackCard::AttackCard(const pugi::xml_node& node) : Card(node)
+AttackCard::AttackCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Attack card created: " << node.attribute("name").as_string() << endl;
 }
 
-int AttackCard::play(Deck& deck)
+void AttackCard::play()
 {
-	auto card = deck.attack();
-	if (card == "ExplodingCard")
-	{
-		return 1000;
-	}
-	else
-	{
-		return 0;
-	}
+	cout << "Attack card played: " << getName() << endl;
 }
 
 std::string AttackCard::getClassType() const

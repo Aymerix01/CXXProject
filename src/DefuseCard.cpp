@@ -3,14 +3,14 @@
 
 using namespace std;
 
-DefuseCard::DefuseCard(const pugi::xml_node& node) : Card(node)
+DefuseCard::DefuseCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Defuse card created: " << node.attribute("name").as_string() << endl;
 }
 
-int DefuseCard::play(Deck& deck)
+void DefuseCard::play()
 {
-	return 0;
+	cout << "Defuse card played: " << getName() << endl;
 }
 
 std::string DefuseCard::getClassType() const

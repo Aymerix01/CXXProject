@@ -3,15 +3,14 @@
 
 using namespace std;
 
-ExplodingCard::ExplodingCard(const pugi::xml_node& node) : Card(node)
+ExplodingCard::ExplodingCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Exploding card created: " << node.attribute("name").as_string() << endl;
 }
 
-int ExplodingCard::play(Deck& deck)
+void ExplodingCard::play()
 {
 	cout << "Exploding card played: " << getName() << endl;
-	return 0;
 }
 
 std::string ExplodingCard::getClassType() const

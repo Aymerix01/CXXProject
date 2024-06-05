@@ -41,9 +41,9 @@ string Player::dump() const
 	return res;
 }
 
-void Player::playCard(int index, Deck& deck)
+void Player::playCard(int index)
 {
-	addPoints(hand[index]->play(deck));
+	hand[index]->play();
 	hand.erase(hand.begin() + index);
 }
 
@@ -85,4 +85,10 @@ void Player::renderHand(sf::RenderWindow& window) const
 
 	}
 }
+
+void Player::onEventCard() 
+{
+	//TODO : implement onEventCard
+}
+
 

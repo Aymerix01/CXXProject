@@ -21,24 +21,26 @@ bool isValueInList(const T& value, const std::vector<T>& list) {
 }
 
 TEST(Deck, Constructeur) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-	Deck deck(root, sprite);
+	Deck deck(root, sprite, eventCardManager);
 
     std::string expected = "Baby Boom\nDynamite\nTNT\n";
 	EXPECT_EQ(deck.dump(), expected);
 }
 
 TEST(Deck, showSomeCards) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_string(s.c_str());
 	ASSERT_TRUE(result) << result.description();
 	pugi::xml_node root = doc.child("root");
-	Deck deck(root, sprite);
+	Deck deck(root, sprite, eventCardManager);
 
 	auto cards = deck.showSomeCards(3);
 	std::string expected = "TNT\nDynamite\nBaby Boom\n";
@@ -50,12 +52,13 @@ TEST(Deck, showSomeCards) {
 }
 
 TEST(Deck, shuffle) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     deck.shuffle();
     std::vector<std::string> possibilities = { "Baby Boom\nDynamite\nTNT\n", 
@@ -69,12 +72,13 @@ TEST(Deck, shuffle) {
 }
 
 TEST(Deck, draw) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     //On vérifie que la carte tirée est bien la première de la liste
     auto drawC = deck.drawCard()->getName();
@@ -87,12 +91,13 @@ TEST(Deck, draw) {
 }
 
 TEST(Deck, addCardToRandom) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     const std::string xmlCard = R"(<?xml version = "1.0"?>
 						   <root>
@@ -102,7 +107,7 @@ TEST(Deck, addCardToRandom) {
     pugi::xml_parse_result result2 = cardNode.load_string(xmlCard.c_str());
     ASSERT_TRUE(result2) << result2.description();
     pugi::xml_node cardRoot = cardNode.child("root");
-    auto c = std::make_unique<ExplodingCard>(cardRoot.first_child());
+    auto c = std::make_unique<ExplodingCard>(cardRoot.first_child(), eventCardManager);
     deck.addCardToRandom(move(c));
 
     std::vector<std::string> possibilities = { "Baby Boom\nDynamite\nTNT\nTest\n",
@@ -113,12 +118,13 @@ TEST(Deck, addCardToRandom) {
 }
 
 TEST(Deck, empty) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_string(s.c_str());
 	ASSERT_TRUE(result) << result.description();
 	pugi::xml_node root = doc.child("root");
-	Deck deck(root, sprite);
+	Deck deck(root, sprite, eventCardManager);
 
 	EXPECT_FALSE(deck.empty());
 	deck.drawCard();
@@ -127,14 +133,14 @@ TEST(Deck, empty) {
 	EXPECT_TRUE(deck.empty());
 }
 
-TEST(Player, drawCard)
-{
+TEST(Player, drawCard) {
+    EventCardManager eventCardManager;
     sf::Sprite sprite;
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     //vérifie que drawCard() ajoute bien une carte à la main du joueur
     Player player("Jean Jacques");
@@ -149,8 +155,8 @@ TEST(Player, drawCard)
 }
 
 
-TEST(Player, hasLost)
-{
+TEST(Player, hasLost) {
+    EventCardManager eventCardManager;
     const std::string str = R"(<?xml version = "1.0"?>
 						   <root>
 							<DefuseCard name="Defuse"/>
@@ -162,7 +168,7 @@ TEST(Player, hasLost)
     pugi::xml_parse_result result = doc.load_string(str.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     Player player("Jean Jacques");
     player.drawCard(deck);
@@ -173,8 +179,8 @@ TEST(Player, hasLost)
     EXPECT_TRUE(!player.hasLost());
 }
 
-TEST(Card, playCard)
-{
+TEST(Card, playCard) {
+    EventCardManager eventCardManager;
     const std::string str = R"(<?xml version = "1.0"?>
 						   <root>
                             <ShuffleCard name="Shuffle"/>
@@ -188,12 +194,12 @@ TEST(Card, playCard)
     pugi::xml_parse_result result = doc.load_string(str.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite);
+    Deck deck(root, sprite, eventCardManager);
 
     Player player("Jean Jacques");
 
     player.drawCard(deck);
-    player.playCard(0, deck);
+    player.playCard(0);
     EXPECT_TRUE(player.getScore() == 100);
 
     player.drawCard(deck);
@@ -201,9 +207,9 @@ TEST(Card, playCard)
     EXPECT_TRUE(vector[0]->getClassType() == "AttackCard");
     EXPECT_TRUE(vector[1]->getClassType() == "ExplodingCard");
     EXPECT_TRUE(vector[2]->getClassType() == "ShuffleCard");
-    /*
-    player.drawCard(deck);
-    player.playCard(2, deck);
-    EXPECT_TRUE(player.getScore() == 1100);
-    */
+    
+    //player.drawCard(deck);
+    //player.playCard(2, deck);
+    //EXPECT_TRUE(player.getScore() == 1100);
+    
 }

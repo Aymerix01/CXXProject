@@ -9,7 +9,8 @@ class Game : private sf::NonCopyable
 {
 public:
 	explicit Game(const std::string &playerName, const pugi::xml_node& node, 
-				  const sf::Sprite& bgSprite, const sf::Sprite& deckSprite);
+				  const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
+				  EventCardManager& eventCardManager);
 	void run();
 		
 private:
@@ -33,6 +34,7 @@ private:
 	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
 	sf::Sprite backgroundSprite;
 
+	EventCardManager& eventCardManager;
 	Player mPlayer;
 	Deck deck;
 

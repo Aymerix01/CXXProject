@@ -11,8 +11,8 @@ class FutureCard : public Card
 private:
 	std::string classType = "FutureCard";
 public:
-	explicit FutureCard(const pugi::xml_node& node);
-	int play(Deck& deck) override;
+	explicit FutureCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
+	void play() override;
 	std::string getClassType() const override;
 	void render(sf::RenderWindow& window, const sf::Vector2f& position) const override;
 };

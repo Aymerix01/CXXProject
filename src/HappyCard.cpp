@@ -3,14 +3,14 @@
 
 using namespace std;
 
-HappyCard::HappyCard(const pugi::xml_node& node) : Card(node)
+HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Happy card created: " << node.attribute("name").as_string() << endl;
 }
 
-int HappyCard::play(Deck& deck)
+void HappyCard::play()
 {
-	return 100;
+	cout << "Happy card played: " << getName() << endl;
 }
 
 std::string HappyCard::getClassType() const
@@ -22,3 +22,4 @@ void HappyCard::render(sf::RenderWindow& window, const sf::Vector2f& position) c
 {
 	//TODO Render
 }
+

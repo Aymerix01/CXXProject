@@ -5,10 +5,12 @@
 #include <memory>
 #include <pugixml.hpp>
 #include "Card.h"
+#include "EventCardListener.h"
+#include "EventCardManager.h"
 
 
 
-class Deck
+class Deck : public EventCardListener
 {
 private:
 	std::vector<std::unique_ptr<Card>> cards;
@@ -18,16 +20,15 @@ private:
 public:
 	/**
 	* \brief Constructor of the Deck class
-	* \param node : pugi::xml_node
+	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
-	explicit Deck(const pugi::xml_node& node, const sf::Sprite& sprite);
+	explicit Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager);
 
 	/**
 	* \brief Add a card to the deck
-	* \param node : pugi::xml_node
-	* Factory Design Pattern
+	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
-	void buildCard(const pugi::xml_node& node);
+	void buildCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 
 	/**
 	* \brief Dump the deck
@@ -50,7 +51,6 @@ public:
 	* \brief Draw the last card from the deck (cards.back())
 	* \return unique_ptr<Card>
 	*/
-
 	std::unique_ptr<Card> drawCard();
 
 	/**
@@ -77,4 +77,6 @@ public:
 	* \param window : sf::RenderWindow
 	*/
 	void render(sf::RenderWindow& window) const;
+
+	void onEventCard() override;
 };

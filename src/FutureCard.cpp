@@ -3,15 +3,14 @@
 
 using namespace std;
 
-FutureCard::FutureCard(const pugi::xml_node& node) : Card(node)
+FutureCard::FutureCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
 	cout << "Future card created: " << node.attribute("name").as_string() << endl;
 }
 
-int FutureCard::play(Deck& deck)
+void FutureCard::play()
 {
-	auto vector = deck.showSomeCards(3);
-	return 0;
+	cout << "Future card played: " << getName() << endl;
 }
 
 std::string FutureCard::getClassType() const
@@ -23,3 +22,4 @@ void FutureCard::render(sf::RenderWindow& window, const sf::Vector2f& position) 
 {
 	//TODO Render
 }
+
