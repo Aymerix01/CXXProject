@@ -5,12 +5,13 @@ using namespace std;
 
 AttackCard::AttackCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	cout << "Attack card created: " << node.attribute("name").as_string() << endl;
+	//cout << "Attack card created: " << node.attribute("name").as_string() << endl;
 }
 
 void AttackCard::play()
 {
 	cout << "Attack card played: " << getName() << endl;
+	notifyEventCardManager(EventCard::ATTACK);
 }
 
 std::string AttackCard::getClassType() const

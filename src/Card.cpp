@@ -1,4 +1,5 @@
 #include "Card.h"
+#include "EventCardListener.h"
 
 using namespace std;
 
@@ -12,8 +13,7 @@ string Card::getName() const
 	return name;
 }
 
-void Card::play()
-{
-	eventCardManager.notifyEventCardListeners();
+void Card::notifyEventCardManager(EventCard eventCard) const {
+	eventCardManager.notifyEventCardListeners(eventCard);
 }
 

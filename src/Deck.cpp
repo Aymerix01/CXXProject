@@ -13,7 +13,7 @@
 using namespace std;
 
 Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager) :
-	deckSprite(sprite)
+	deckSprite(sprite), eventCardManager(eventCardManager)
 {
 	deckSprite.setPosition(deckPosition);
 	pugi::xml_node n = node.first_child();
@@ -107,6 +107,15 @@ void Deck::addCardToRandom(unique_ptr<Card> card)
 	}
 }
 
+void Deck::moveFirstCardToRandom()
+{
+	if (!cards.empty()) {
+		auto card = move(cards[0]);
+		cards.erase(cards.begin());
+		addCardToRandom(move(card));
+	}
+}
+
 vector<Card*> Deck::showSomeCards(int nbCards)
 {
 	if (!cards.empty()) {
@@ -132,6 +141,22 @@ void Deck::render(sf::RenderWindow& window) const
 	window.draw(deckSprite);
 }
 
-void Deck::onEventCard() {
-	//TODO : implement onEventCard
+void Deck::onEventCard(EventCard eventCard) {
+	using enum EventCard;
+	if (eventCard == ATTACK) {
+		cout << "Deck: Attack event card" << endl;
+		if (cards[cards.size() - 1]->getClassType() == "ExplodingCard") {
+			cout << "Deck: Player gains points" << endl;
+			eventCardManager.notifyEventCardListeners(EventCard::ATTACKPOINTS);
+		}
+		moveFirstCardToRandom();
+	}
+	else if (eventCard == SHUFFLE) {
+		cout << "Deck: Shuffle event card" << endl;
+		shuffle();
+	}
+	else if (eventCard == FUTURE) {
+		cout << "Deck: Future event card" << endl;
+		showSomeCards(3);
+	}
 }

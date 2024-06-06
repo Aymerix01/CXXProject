@@ -16,6 +16,7 @@ private:
 	std::vector<std::unique_ptr<Card>> cards;
 	sf::Sprite deckSprite;
 	sf::Vector2f deckPosition = sf::Vector2f(125, 715);
+	EventCardManager& eventCardManager;
 
 public:
 	/**
@@ -60,6 +61,11 @@ public:
 	void addCardToRandom(std::unique_ptr<Card> card);
 
 	/**
+	* \brief Move the first card of the deck to a random position
+	*/
+	void moveFirstCardToRandom();
+
+	/**
 	* \brief Show the nbCards first cards of the deck
 	* \param card : unique_ptr<Card>
 	* \return vector<Card*> : vector of observed cards
@@ -78,5 +84,5 @@ public:
 	*/
 	void render(sf::RenderWindow& window) const;
 
-	void onEventCard() override;
+	void onEventCard(EventCard eventCard) override;
 };

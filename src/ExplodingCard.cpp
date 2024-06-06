@@ -5,7 +5,7 @@ using namespace std;
 
 ExplodingCard::ExplodingCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	cout << "Exploding card created: " << node.attribute("name").as_string() << endl;
+	//cout << "Exploding card created: " << node.attribute("name").as_string() << endl;
 }
 
 void ExplodingCard::play()

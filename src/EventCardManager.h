@@ -12,5 +12,5 @@ public:
 	EventCardManager() = default;
 
 	void addEventCardListener(EventCardListener* listener);
-	void notifyEventCardListeners() const;
+	void notifyEventCardListeners(EventCard eventCard) const;
 };

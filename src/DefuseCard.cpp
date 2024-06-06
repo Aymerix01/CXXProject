@@ -5,7 +5,7 @@ using namespace std;
 
 DefuseCard::DefuseCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	cout << "Defuse card created: " << node.attribute("name").as_string() << endl;
+	//cout << "Defuse card created: " << node.attribute("name").as_string() << endl;
 }
 
 void DefuseCard::play()

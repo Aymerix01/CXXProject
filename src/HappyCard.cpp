@@ -5,12 +5,13 @@ using namespace std;
 
 HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	cout << "Happy card created: " << node.attribute("name").as_string() << endl;
+	//cout << "Happy card created: " << node.attribute("name").as_string() << endl;
 }
 
 void HappyCard::play()
 {
 	cout << "Happy card played: " << getName() << endl;
+	notifyEventCardManager(EventCard::HAPPYPOINTS);
 }
 
 std::string HappyCard::getClassType() const

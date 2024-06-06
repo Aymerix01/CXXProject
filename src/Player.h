@@ -60,5 +60,5 @@ public:
 
 	void addPoints(int points) { score += points; };
 	int getScore() const{ return score; };
-	void onEventCard() override;
+	void onEventCard(EventCard eventCard) override;
 };

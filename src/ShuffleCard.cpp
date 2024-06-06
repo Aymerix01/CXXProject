@@ -5,12 +5,13 @@ using namespace std;
 
 ShuffleCard::ShuffleCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	cout << "Shuffle card created: " << node.attribute("name").as_string() << endl;
+	//cout << "Shuffle card created: " << node.attribute("name").as_string() << endl;
 }
 
 void ShuffleCard::play()
 {
 	cout << "Shuffle card played: " << getName() << endl;
+	notifyEventCardManager(EventCard::SHUFFLE);
 }
 
 std::string ShuffleCard::getClassType() const

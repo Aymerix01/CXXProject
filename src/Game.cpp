@@ -19,6 +19,7 @@ mPlayer(playerName), deck(node, deckSprite, eventCardManager)
 
 	this->eventCardManager.addEventCardListener(&mPlayer);
 	this->eventCardManager.addEventCardListener(&deck);
+	this->eventCardManager.addEventCardListener(this);
 }
 
 void Game::run()
@@ -103,5 +104,12 @@ void Game::updateStatistics(sf::Time elapsedTime)
 							 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
+	}
+}
+
+void Game::onEventCard(EventCard eventCard) {
+	if (eventCard == EventCard::FUTURE) {
+		cout << "Game: Future event card" << endl;
+		deck.showSomeCards(3);
 	}
 }

@@ -6,7 +6,6 @@
 #include <memory>
 #include "EventCardManager.h"
 
-
 class Deck;
 class Card
 {
@@ -16,7 +15,8 @@ private:
 
 public:
 	explicit Card(const pugi::xml_node& node, EventCardManager& eventCardManager);
-	virtual void play();
+	virtual void play() = 0;
+	void notifyEventCardManager(EventCard eventCard) const;
 	std::string getName() const;
 	virtual std::string getClassType() const = 0;
 	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position) const = 0;

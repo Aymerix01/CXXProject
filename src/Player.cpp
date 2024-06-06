@@ -86,9 +86,16 @@ void Player::renderHand(sf::RenderWindow& window) const
 	}
 }
 
-void Player::onEventCard() 
+void Player::onEventCard(EventCard eventCard)
 {
-	//TODO : implement onEventCard
+	if (eventCard == EventCard::HAPPYPOINTS) {
+		cout << playerName << " has gained 100 points" << endl;
+		addPoints(100);
+	}
+	else if (eventCard == EventCard::ATTACKPOINTS) {
+		cout << playerName << " has gained 1000 points" << endl;
+		addPoints(1000);
+	}
 }
 
 
