@@ -156,7 +156,9 @@ void Deck::onEventCard(EventCard eventCard) {
 		shuffle();
 	}
 	else if (eventCard == FUTURE) {
+		//Il y a un problème ici, il faut afficher les 3 cartes retournées
 		cout << "Deck: Future event card" << endl;
 		showSomeCards(3);
 	}
+	
 }
