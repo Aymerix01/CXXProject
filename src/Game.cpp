@@ -19,7 +19,6 @@ mPlayer(playerName), deck(node, deckSprite, eventCardManager)
 
 	this->eventCardManager.addEventCardListener(&mPlayer);
 	this->eventCardManager.addEventCardListener(&deck);
-	this->eventCardManager.addEventCardListener(this);
 }
 
 void Game::run()
