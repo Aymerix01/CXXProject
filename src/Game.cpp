@@ -10,14 +10,14 @@ Game::Game(const string &playerName, const pugi::xml_node& node,
 		   const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
 			EventCardManager& eventCardManager) :
 backgroundSprite(bgSprite), eventCardManager(eventCardManager),
-mPlayer(playerName), deck(node, deckSprite, eventCardManager)
+player(playerName), deck(node, deckSprite, eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
 
-	this->eventCardManager.addEventCardListener(&mPlayer);
+	this->eventCardManager.addEventCardListener(&player);
 	this->eventCardManager.addEventCardListener(&deck);
 }
 
@@ -45,12 +45,12 @@ void Game::run()
 
 void Game::start()
 {
-	eventCardManager.notifyEventCardListeners(EventCard::SHUFFLE);
+	deck.shuffle();
 	for (int i = 0; i < nbCardPlayerinitial; i++)
 	{
-		mPlayer.drawCard(deck);
+		player.drawCard(deck);
 	}
-	mPlayer.showHand();
+	player.showHand();
 }
 
 void Game::processEvents()

@@ -19,7 +19,7 @@ private:
 	void userEvents(sf::Event event);
 	void update(sf::Time elapsedTime);
 	void render();
-	void updateStatistics(sf::Time elapsedTime);	
+	void updateStatistics(sf::Time elapsedTime);
 
 	static const sf::Time	TimePerFrame;
 	sf::RenderWindow		mWindow{sf::VideoMode{1920, 1080}, "SFML Application", sf::Style::Close};
@@ -35,7 +35,7 @@ private:
 	sf::Sprite backgroundSprite;
 
 	EventCardManager& eventCardManager;
-	Player mPlayer;
+	Player player;
 	Deck deck;
 
 };
