@@ -10,7 +10,8 @@ class Game : private sf::NonCopyable
 public:
 	explicit Game(const std::string &playerName, const pugi::xml_node& node, 
 				  const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
-				  EventCardManager& eventCardManager);
+				  const sf::Sprite& MPSprite, const sf::Sprite& MCSprite,
+				  const sf::Sprite& MPauseSprite, EventCardManager& eventCardManager);
 	void run();
 		
 private:
@@ -29,10 +30,17 @@ private:
 	sf::Time				mStatisticsUpdateTime;
 	std::size_t				mStatisticsNumFrames{0};
 
+	bool menuPrincipal = true;
+	bool menuCartes = false;
+	bool menuPause = false;
 	int nbCardPlayerinitial = 5;
 	sf::Vector2f cardSize = sf::Vector2f(100, 150);
 	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
 	sf::Sprite backgroundSprite;
+	sf::Sprite menuPrincipalSprite;
+	sf::Sprite menuCartesSprite;
+	sf::Sprite menuPauseSprite;
+	sf::Text menuCartesText;
 
 	EventCardManager& eventCardManager;
 	Player player;

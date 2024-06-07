@@ -8,14 +8,19 @@ const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
 Game::Game(const string &playerName, const pugi::xml_node& node, 
 		   const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
-			EventCardManager& eventCardManager) :
-backgroundSprite(bgSprite), eventCardManager(eventCardManager),
-player(playerName), deck(node, deckSprite, eventCardManager)
+		   const sf::Sprite& MPSprite, const sf::Sprite& MCSprite, 
+		   const sf::Sprite& MPauseSprite, EventCardManager& eventCardManager) :
+backgroundSprite(bgSprite), menuPrincipalSprite(MPSprite), menuCartesSprite(MCSprite), menuPauseSprite(MPauseSprite),
+eventCardManager(eventCardManager), player(playerName), deck(node, deckSprite, eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
+
+	menuCartesText.setFont(mFont);
+	menuCartesText.setPosition(370.f, 493.f);
+	menuCartesText.setCharacterSize(50);
 
 	this->eventCardManager.addEventCardListener(&player);
 	this->eventCardManager.addEventCardListener(&deck);
@@ -35,7 +40,8 @@ void Game::run()
 			timeSinceLastUpdate -= TimePerFrame;
 
 			processEvents();
-			update(TimePerFrame);
+			if (!menuPrincipal)
+				update(TimePerFrame);
 		}
 
 		updateStatistics(elapsedTime);
@@ -64,14 +70,88 @@ void Game::processEvents()
 
 void Game::userEvents(sf::Event event)
 {
-	switch (event.type)
-	{
-		case sf::Event::Closed:
+	if (event.type == sf::Event::Closed) {
+		mWindow.close();
+	}
+	else if (event.type == sf::Event::MouseButtonPressed) {
+		if (menuPrincipal && !menuCartes && !menuPause && event.mouseButton.x >= 780 && event.mouseButton.x <= 1136 &&
+			event.mouseButton.y >= 365 && event.mouseButton.y <= 605)
+		{
+			menuPrincipal = false;
+		}
+		else if (menuPrincipal && !menuCartes && !menuPause && event.mouseButton.x >= 785 && event.mouseButton.x <= 1141 &&
+				event.mouseButton.y >= 709 && event.mouseButton.y <= 948)
+		{
 			mWindow.close();
-			break;
-
-		default:
-			break;
+		}
+		else if (menuPrincipal && !menuCartes && !menuPause && event.mouseButton.x >= 194 && event.mouseButton.x <= 382 &&
+				 event.mouseButton.y >= 475 && event.mouseButton.y <= 756)
+		{
+			menuCartesText.setString("Cliquez sur une carte pour voir sa description");
+			menuCartes = true;
+		}
+		else if (menuCartes && event.mouseButton.x >= 836 && event.mouseButton.x <= 1118 &&
+			     event.mouseButton.y >= 825 && event.mouseButton.y <= 1014)
+		{
+			menuCartes = false;
+		}
+		else if (menuPause && event.mouseButton.x >= 772 && event.mouseButton.x <= 1123 &&
+				event.mouseButton.y >= 356 && event.mouseButton.y <= 593)
+		{
+			menuPause = false;
+		}
+		else if (menuPause && event.mouseButton.x >= 774 && event.mouseButton.x <= 1122 &&
+				 event.mouseButton.y >= 750 && event.mouseButton.y <= 987)
+		{
+			menuPause = false;
+			menuPrincipal = true;
+		}
+		else if (menuPause && event.mouseButton.x >= 132 && event.mouseButton.x <= 316 &&
+				 event.mouseButton.y >= 448 && event.mouseButton.y <= 725)
+		{
+			menuCartes = true;
+		}
+	}
+	else if (event.type == sf::Event::KeyPressed) {
+		if (!menuPrincipal && !menuPause && event.key.code == sf::Keyboard::Escape) {
+			menuPause = true;
+		}
+		else if (menuPause && event.key.code == sf::Keyboard::Escape) {
+			menuPause = false;
+			menuCartes = false;
+		}
+	}
+	if (menuCartes) {
+		if (event.mouseButton.x >= 188 && event.mouseButton.x <= 375 &&
+			event.mouseButton.y >= 107 && event.mouseButton.y <= 389) 
+		{							 
+			menuCartesText.setString("Cette carte vous permet d'éviter les sanglots du bébé");
+		}
+		else if (event.mouseButton.x >= 465 && event.mouseButton.x <= 652 &&
+			     event.mouseButton.y >= 107 && event.mouseButton.y <= 389)
+		{
+			menuCartesText.setString("Cette carte vous permet de mélanger les cartes du Deck");
+		}
+		else if (event.mouseButton.x >= 734 && event.mouseButton.x <= 923 &&
+				 event.mouseButton.y >= 107 && event.mouseButton.y <= 389)
+		{
+			menuCartesText.setString("Cette carte vous permet de faire exploser de rire le bébé");
+		}
+		else if (event.mouseButton.x >= 1013 && event.mouseButton.x <= 1197 &&
+			     event.mouseButton.y >= 107 && event.mouseButton.y <= 389)
+		{
+			menuCartesText.setString("Cette carte vous permet de voir les 3 premières cartes du Deck");
+		}
+		else if (event.mouseButton.x >= 1277 && event.mouseButton.x <= 1463 &&
+			     event.mouseButton.y >= 107 && event.mouseButton.y <= 389)
+		{
+			menuCartesText.setString("Cette carte vous permet de renvoyer la première carte du Deck");
+		}
+		else if (event.mouseButton.x >= 1573 && event.mouseButton.x <= 1788 &&
+			     event.mouseButton.y >= 107 && event.mouseButton.y <= 389)
+		{
+			menuCartesText.setString("Cette carte fait exploser le bébé en sanglots. Evitez la !");
+		}
 	}
 }
 
@@ -83,8 +163,22 @@ void Game::update(sf::Time elapsedTime)
 void Game::render()
 {
 	mWindow.clear();
-	mWindow.draw(backgroundSprite);
-	deck.render(mWindow);
+	if (menuCartes) {
+		mWindow.draw(menuCartesSprite);
+		mWindow.draw(menuCartesText);
+	}
+	else if (menuPause)
+	{
+		mWindow.draw(menuPauseSprite);
+	}
+	else if (menuPrincipal)
+	{
+		mWindow.draw(menuPrincipalSprite);
+	}
+	else {
+		mWindow.draw(backgroundSprite);
+		deck.render(mWindow);
+	}
     //TODO: Implement the render method
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
