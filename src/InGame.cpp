@@ -17,6 +17,7 @@ void InGame::onUserEvent(sf::Event event, sf::RenderWindow& window)
 	if (event.type == sf::Event::KeyPressed) {
 		if (event.key.code == sf::Keyboard::Escape) {
 			m_manager.paused = true;
+			m_manager.inGame = false;
 			m_manager.changeState(std::make_unique<MenuPause>(m_manager));
 		}
 	}

@@ -20,6 +20,7 @@ void MenuPrincipal::onUserEvent(sf::Event event, sf::RenderWindow& window)
 		if (event.mouseButton.x >= 780 && event.mouseButton.x <= 1136 &&
 			event.mouseButton.y >= 365 && event.mouseButton.y <= 605)
 		{
+			m_manager.inGame = true;
 			m_manager.changeState(std::make_unique<InGame>(m_manager));
 		}
 		else if (event.mouseButton.x >= 785 && event.mouseButton.x <= 1141 &&

@@ -31,19 +31,15 @@ private:
 	sf::Time				mStatisticsUpdateTime;
 	std::size_t				mStatisticsNumFrames{0};
 
-	bool menuPrincipal = true;
-	bool menuCartes = false;
-	bool menuPause = false;
 	int nbCardPlayerinitial = 5;
 	sf::Vector2f cardSize = sf::Vector2f(100, 150);
 	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
-	
-	MenuStateManager menuStateManager;
 
 	EventCardManager& eventCardManager;
 	Player player;
 	Deck deck;
 
+	MenuStateManager menuStateManager;
 };
 
 #endif // BOOK_GAME_HPP

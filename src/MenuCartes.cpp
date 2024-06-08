@@ -21,6 +21,7 @@ void MenuCartes::onUserEvent(sf::Event event, sf::RenderWindow& window)
 		if (event.key.code == sf::Keyboard::Escape && m_manager.paused)
 		{
 			m_manager.paused = false;
+			m_manager.inGame = true;
 			m_manager.changeState(std::make_unique<InGame>(m_manager));
 		}
 	}

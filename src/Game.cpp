@@ -10,9 +10,9 @@ Game::Game(const std::string& playerName, const pugi::xml_node& node,
 			const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
 			const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
 			const sf::Sprite& deckSprite, EventCardManager& eventCardManager) : 
-menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite),
 eventCardManager(eventCardManager), player(playerName), 
-deck(node, deckSprite, eventCardManager)
+deck(node, deckSprite, eventCardManager),
+menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -37,7 +37,7 @@ void Game::run()
 			timeSinceLastUpdate -= TimePerFrame;
 
 			processEvents();
-			if (!menuPrincipal)
+			if(menuStateManager.inGame)
 				update(TimePerFrame);
 		}
 
@@ -82,9 +82,12 @@ void Game::render()
 {
 	mWindow.clear();
 	menuStateManager.render(mWindow);
-	//deck.render(mWindow);
+	if (menuStateManager.inGame)
+	{
+		deck.render(mWindow);
+		//player.render(mWindow);
+	}
 	
-    //TODO: Implement the render method
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
 }

@@ -5,6 +5,8 @@
 #include <memory>
 #include "MenuState.h"
 
+class Deck;
+class Player;
 class MenuStateManager
 {
 private:
@@ -25,4 +27,5 @@ public:
 	sf::Sprite menuPauseSprite;
 	sf::Text menuCartesText;
 	bool paused = false;
+	bool inGame = false;
 };
