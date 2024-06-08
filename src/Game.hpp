@@ -4,14 +4,15 @@
 #include "SFML/Graphics.hpp"
 #include "Player.h"
 #include "Deck.h"
+#include "MenuStateManager.h"
 
 class Game : private sf::NonCopyable
 {
 public:
-	explicit Game(const std::string &playerName, const pugi::xml_node& node, 
-				  const sf::Sprite& bgSprite, const sf::Sprite& deckSprite,
-				  const sf::Sprite& MPSprite, const sf::Sprite& MCSprite,
-				  const sf::Sprite& MPauseSprite, EventCardManager& eventCardManager);
+	explicit Game(const std::string &playerName, const pugi::xml_node& node,
+				  const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
+				  const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
+				  const sf::Sprite& deckSprite, EventCardManager& eventCardManager);
 	void run();
 		
 private:
@@ -36,11 +37,8 @@ private:
 	int nbCardPlayerinitial = 5;
 	sf::Vector2f cardSize = sf::Vector2f(100, 150);
 	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
-	sf::Sprite backgroundSprite;
-	sf::Sprite menuPrincipalSprite;
-	sf::Sprite menuCartesSprite;
-	sf::Sprite menuPauseSprite;
-	sf::Text menuCartesText;
+	
+	MenuStateManager menuStateManager;
 
 	EventCardManager& eventCardManager;
 	Player player;

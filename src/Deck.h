@@ -8,8 +8,6 @@
 #include "EventCardListener.h"
 #include "EventCardManager.h"
 
-
-
 class Deck : public EventCardListener
 {
 private:
