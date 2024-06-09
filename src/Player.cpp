@@ -76,13 +76,12 @@ bool Player::hasLost() const
 void Player::renderHand(sf::RenderWindow& window) const
 {
 	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 600), 715);
-	//int index = 0;
+	
 	for (const auto& card : hand)
 	{
 		card->render(window, position);
-		//position.x += 400 / static_cast<float>(index + 1);
+		cout << card->getClassType() << endl;
 		position.x += 200;
-		//index++;
 	}
 }
 

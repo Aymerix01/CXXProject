@@ -40,7 +40,6 @@ void Game::run()
 			if(menuStateManager.inGame)
 				update(TimePerFrame);
 		}
-
 		updateStatistics(elapsedTime);
 		render();
 	}
@@ -89,17 +88,24 @@ void Game::update(sf::Time elapsedTime)
 		}
 		else if (playerInput == 1)
 		{
-			cout << "Your hand" << endl;
-			player.showHand();
-			cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
-			cin >> playerInput;
-			player.playCard(playerInput);
+			if (player.getHandLength() <= 0)
+			{
+				cout << "You don't have  a card to play" << endl;
+				playerInput = -1;
+			}
+			else
+			{
+				cout << "Your hand" << endl;
+				player.showHand();
+				cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
+				cin >> playerInput;
+				player.playCard(playerInput);
+			}
 		}
 	}
 	else {
 		cout << "Game Over" << endl;
 	}
-
 }
 
 void Game::render()
@@ -111,7 +117,6 @@ void Game::render()
 		deck.render(mWindow);
 		player.renderHand(mWindow);
 	}
-	
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
 }
