@@ -19,7 +19,7 @@ public:
 	void notifyEventCardManager(EventCard eventCard) const;
 	std::string getName() const;
 	virtual std::string getClassType() const = 0;
-	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position) const = 0;
+	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position) = 0;
 
 	virtual ~Card() = default;
 };

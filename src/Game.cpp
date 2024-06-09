@@ -75,7 +75,22 @@ void Game::userEvents(sf::Event event)
 
 void Game::update(sf::Time elapsedTime)
 {
-    //TODO: Implement the update method
+	cout << "Please choose an action" << endl;
+	cout << "0 : Draw card" << endl;
+	cout << "1 : Play card" << endl;
+	cin >> playerInput;
+	if (playerInput == 0)
+	{
+		player.drawCard(deck);
+		player.showHand();
+	}
+	else if (playerInput == 1)
+	{
+		player.showHand();
+		cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
+		cin >> playerInput;
+		player.playCard(playerInput);
+	}
 }
 
 void Game::render()
@@ -85,7 +100,7 @@ void Game::render()
 	if (menuStateManager.inGame)
 	{
 		deck.render(mWindow);
-		//player.render(mWindow);
+		player.renderHand(mWindow);
 	}
 	
 	mWindow.draw(mStatisticsText);

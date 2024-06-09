@@ -10,9 +10,11 @@ class DefuseCard : public Card
 {
 private:
 	std::string classType = "DefuseCard";
+	sf::Sprite defuseCardSprite;
+	sf::Texture defuseCardTexture;
 public:
 	explicit DefuseCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;
-	void render(sf::RenderWindow& window, const sf::Vector2f& position) const override;
+	void render(sf::RenderWindow& window, const sf::Vector2f& position) override;
 };

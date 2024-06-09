@@ -5,7 +5,11 @@ using namespace std;
 
 ExplodingCard::ExplodingCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	//cout << "Exploding card created: " << node.attribute("name").as_string() << endl;
+	if (!explodingCardTexture.loadFromFile("resources/ExplodingCard-BabyBoom.png"))
+	{
+		std::cerr << "Error loading texture" << std::endl;
+	}
+	explodingCardSprite.setTexture(explodingCardTexture);
 }
 
 void ExplodingCard::play()
@@ -18,6 +22,8 @@ std::string ExplodingCard::getClassType() const
 	return classType;
 }
 
-void ExplodingCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const {
-	//TODO: Implement render
+void ExplodingCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+{
+	explodingCardSprite.setPosition(position);
+	window.draw(explodingCardSprite);
 }

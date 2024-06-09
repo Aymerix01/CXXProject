@@ -5,7 +5,11 @@ using namespace std;
 
 FutureCard::FutureCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	//cout << "Future card created: " << node.attribute("name").as_string() << endl;
+	if (!futureCardTexture.loadFromFile("resources/FutureCard-Babytcoin.png"))
+	{
+		std::cerr << "Error loading texture" << std::endl;
+	}
+	futureCardSprite.setTexture(futureCardTexture);
 }
 
 void FutureCard::play()
@@ -19,8 +23,9 @@ std::string FutureCard::getClassType() const
 	return classType;
 }
 
-void FutureCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const
+void FutureCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
 {
-	//TODO Render
+	futureCardSprite.setPosition(position);
+	window.draw(futureCardSprite);
 }
 

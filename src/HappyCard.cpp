@@ -3,9 +3,14 @@
 
 using namespace std;
 
-HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
+HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : 
+	Card(node, eventCardManager)
 {
-	//cout << "Happy card created: " << node.attribute("name").as_string() << endl;
+	if (!happyCardTexture.loadFromFile("resources/HappyCard-BabyShark.png"))
+	{
+		std::cerr << "Error loading texture" << std::endl;
+	}
+	happyCardSprite.setTexture(happyCardTexture);
 }
 
 void HappyCard::play()
@@ -19,8 +24,9 @@ std::string HappyCard::getClassType() const
 	return classType;
 }
 
-void HappyCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const
+void HappyCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
 {
-	//TODO Render
+	happyCardSprite.setPosition(position);
+	window.draw(happyCardSprite);
 }
 

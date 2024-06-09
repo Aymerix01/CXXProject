@@ -5,7 +5,11 @@ using namespace std;
 
 DefuseCard::DefuseCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
 {
-	//cout << "Defuse card created: " << node.attribute("name").as_string() << endl;
+	if (!defuseCardTexture.loadFromFile("resources/DefuseCard-Babysous.png"))
+	{
+		std::cerr << "Error loading texture" << std::endl;
+	}
+	defuseCardSprite.setTexture(defuseCardTexture);
 }
 
 void DefuseCard::play()
@@ -18,7 +22,8 @@ std::string DefuseCard::getClassType() const
 	return classType;
 }
 
-void DefuseCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const
+void DefuseCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
 {
-	//TODO Render
+	defuseCardSprite.setPosition(position);
+	window.draw(defuseCardSprite);
 }

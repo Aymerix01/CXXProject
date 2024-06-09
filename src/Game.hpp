@@ -40,6 +40,8 @@ private:
 	Deck deck;
 
 	MenuStateManager menuStateManager;
+
+	int playerInput;
 };
 
 #endif // BOOK_GAME_HPP

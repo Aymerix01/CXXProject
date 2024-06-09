@@ -3,9 +3,14 @@
 
 using namespace std;
 
-ShuffleCard::ShuffleCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : Card(node, eventCardManager)
+ShuffleCard::ShuffleCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : 
+	Card(node, eventCardManager)
 {
-	//cout << "Shuffle card created: " << node.attribute("name").as_string() << endl;
+	if (!shuffleCardTexture.loadFromFile("resources/ShuffleCard-Babycyclette.png"))
+	{
+		std::cerr << "Error loading texture" << std::endl;
+	}
+	shuffleCardSprite.setTexture(shuffleCardTexture);
 }
 
 void ShuffleCard::play()
@@ -19,8 +24,9 @@ std::string ShuffleCard::getClassType() const
 	return classType;
 }
 
-void ShuffleCard::render(sf::RenderWindow& window, const sf::Vector2f& position) const
+void ShuffleCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
 {
-	//TODO Render
+	shuffleCardSprite.setPosition(position);
+	window.draw(shuffleCardSprite);
 }
 

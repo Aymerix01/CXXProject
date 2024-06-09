@@ -61,4 +61,5 @@ public:
 	void addPoints(int points) { score += points; };
 	int getScore() const{ return score; };
 	void onEventCard(EventCard eventCard) override;
+	auto getHandLength() const { return hand.size(); };
 };
