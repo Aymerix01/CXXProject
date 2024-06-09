@@ -75,22 +75,31 @@ void Game::userEvents(sf::Event event)
 
 void Game::update(sf::Time elapsedTime)
 {
-	cout << "Please choose an action" << endl;
-	cout << "0 : Draw card" << endl;
-	cout << "1 : Play card" << endl;
-	cin >> playerInput;
-	if (playerInput == 0)
+	if (!player.hasLost())
 	{
-		player.drawCard(deck);
-		player.showHand();
-	}
-	else if (playerInput == 1)
-	{
-		player.showHand();
-		cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
+		cout << "Please choose an action" << endl;
+		cout << "0 : Draw card" << endl;
+		cout << "1 : Play card" << endl;
 		cin >> playerInput;
-		player.playCard(playerInput);
+		if (playerInput == 0)
+		{
+			player.drawCard(deck);
+			cout << "Your hand" << endl;
+			player.showHand();
+		}
+		else if (playerInput == 1)
+		{
+			cout << "Your hand" << endl;
+			player.showHand();
+			cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
+			cin >> playerInput;
+			player.playCard(playerInput);
+		}
 	}
+	else {
+		cout << "Game Over" << endl;
+	}
+
 }
 
 void Game::render()
