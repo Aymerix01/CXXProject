@@ -58,24 +58,35 @@ void Player::playCard(int index)
 	hand.erase(hand.begin() + index);
 }
 
-bool Player::hasLost() const
+bool Player::hasLost(Deck& deck)
 {
 	bool getExplodingCard = false;
 	bool getDefuseCard = false;
+	int indexExplodingCard = -1;
+	int indexDefuseCard = -1;
+	int index = 0;
 	for (const auto& card : hand)
 	{
 		if (getExplodingCard && getDefuseCard)
 		{
+			cout << "Remove exploding card and defuse card from hand" << endl;
+			auto explodingCard = move(hand[indexExplodingCard]);
+			deck.addCardToRandom(move(explodingCard));
+			hand.erase(hand.begin() + max(indexExplodingCard, indexDefuseCard));
+			hand.erase(hand.begin() + min(indexExplodingCard, indexDefuseCard));
 			return false;
 		}
 		if (card->getClassType() == "ExplodingCard")
 		{
 			getExplodingCard = true;
+			indexExplodingCard = index;
 		}
 		if (card->getClassType() == "DefuseCard")
 		{
 			getDefuseCard = true;
+			indexDefuseCard = index;
 		}
+		index++;
 	}
 	if (getExplodingCard && !getDefuseCard)
 	{

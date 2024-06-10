@@ -76,7 +76,7 @@ void Game::userEvents(sf::Event event)
 
 void Game::update(sf::Time elapsedTime)
 {
-	if (!player.hasLost())
+	if (!player.hasLost(deck))
 	{
 		cout << "Please choose an action" << endl;
 		cout << "0 : Draw card" << endl;
@@ -87,6 +87,7 @@ void Game::update(sf::Time elapsedTime)
 			player.drawCard(deck);
 			cout << "Your hand" << endl;
 			player.showHand();
+			player.hasLost(deck);
 		}
 		else if (playerInput == 1)
 		{

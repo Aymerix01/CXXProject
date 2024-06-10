@@ -56,7 +56,7 @@ public:
 	* \brief Check if the player has lost
 	* \return bool
 	*/
-	bool hasLost() const;
+	bool hasLost(Deck& deck);
 
 	/**
 	* \brief Render the player's hand
