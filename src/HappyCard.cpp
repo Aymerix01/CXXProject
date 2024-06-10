@@ -1,12 +1,17 @@
 #include "HappyCard.h"
 #include <iostream>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
 HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager) : 
 	Card(node, eventCardManager)
 {
-	if (!happyCardTexture.loadFromFile("resources/HappyCard-BabyShark.png"))
+	std::ostringstream ostringstreamSpritePath;
+	ostringstreamSpritePath << "resources/HappyCard-" << string(node.attribute("name").as_string()) << ".png";
+	std::string spritePath = ostringstreamSpritePath.str();
+	if (!happyCardTexture.loadFromFile(spritePath))
 	{
 		std::cerr << "Error loading texture" << std::endl;
 	}

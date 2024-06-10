@@ -24,34 +24,40 @@ Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManage
 	}
 }
 
-void Deck::buildCard(const pugi::xml_node& node, EventCardManager& eventCardManager) {
+void Deck::buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger) {
 	if (string(node.name()) == "ExplodingCard") {
-		auto c = make_unique<ExplodingCard>(node, eventCardManager);
-		cards.push_back(move(c));
+		bombCard = make_unique<ExplodingCard>(node, evntCrdMnger);
 	}
 	else if (string(node.name()) == "AttackCard") {
-		auto c = make_unique<AttackCard>(node, eventCardManager);
+		auto c = make_unique<AttackCard>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "DefuseCard") {
-		auto c = make_unique<DefuseCard>(node, eventCardManager);
-		cards.push_back(move(c));
+		defuseCard = make_unique<DefuseCard>(node, evntCrdMnger);
 	}
 	else if (string(node.name()) == "FutureCard") {
-		auto c = make_unique<FutureCard>(node, eventCardManager);
+		auto c = make_unique<FutureCard>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "ShuffleCard") {
-		auto c = make_unique<ShuffleCard>(node, eventCardManager);
+		auto c = make_unique<ShuffleCard>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "HappyCard") {
-		auto c = make_unique<HappyCard>(node, eventCardManager);
+		auto c = make_unique<HappyCard>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else {
 		cerr << "Unknown card type: " << node.name() << endl;
 	}
+}
+
+unique_ptr<Card> Deck::getDefuseCard() {
+	return move(defuseCard);
+}
+
+void Deck::placeExplodingCard() {
+	addCardToRandom(move(bombCard));
 }
 
 string Deck::dump() const
@@ -138,7 +144,8 @@ bool Deck::empty() const
 
 void Deck::render(sf::RenderWindow& window) const
 {
-	window.draw(deckSprite);
+	if(!cards.empty())
+		window.draw(deckSprite);
 }
 
 void Deck::onEventCard(EventCard eventCard) {

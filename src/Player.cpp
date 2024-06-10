@@ -9,8 +9,13 @@ Player::Player(const string& name) :
 {
 }
 
+void Player::getDefuseCard(Deck& deck) {
+	hand.push_back(deck.getDefuseCard());
+}
+
 void Player::drawCard(Deck& deck)
 {
+	lastPlayedCards.clear();
 	if(!deck.empty())
 	{ 
 		auto card = deck.drawCard();
@@ -44,7 +49,7 @@ string Player::dump() const
 void Player::playCard(int index)
 {
 	hand[index]->play();
-	lastPlayedCard = move(hand[index]);
+	lastPlayedCards.push_back(move(hand[index]));
 	hand.erase(hand.begin() + index);
 }
 
@@ -76,23 +81,23 @@ bool Player::hasLost() const
 
 void Player::renderHand(sf::RenderWindow& window) const
 {
-	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 500), 715);
+	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 475), 715);
 	
 	for (const auto& card : hand)
 	{
 		card->render(window, position);
-		position.x += 200;
+		position.x += 800 / static_cast<float>(hand.size());
 	}
 }
 
-void Player::renderPlayedCard(sf::RenderWindow& window)
+void Player::renderPlayedCard(sf::RenderWindow& window) const
 {
-	if (lastPlayedCard != nullptr)
+	auto position = sf::Vector2f(static_cast<float>(window.getSize().x / 2 - 1000), 250);
+	for(const auto& card : lastPlayedCards)
 	{
-		auto position = sf::Vector2f(static_cast<float>(window.getSize().x / 2), 300);
-		lastPlayedCard->render(window, position);
+		position.x += 1600 / static_cast<float>(lastPlayedCards.size() + 1);
+		card->render(window, position);
 	}
-	lastPlayedCard = nullptr;
 }
 
 void Player::onEventCard(EventCard eventCard)

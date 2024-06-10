@@ -51,6 +51,9 @@ void Game::start()
 	{
 		player.drawCard(deck);
 	}
+	player.getDefuseCard(deck);
+	deck.placeExplodingCard();
+	deck.shuffle();
 	player.showHand();
 }
 

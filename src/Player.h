@@ -15,7 +15,7 @@ private:
 	const std::string playerName;
 	int score = 0;
 	std::vector<std::unique_ptr<Card>> hand;
-	std::unique_ptr<Card> lastPlayedCard;
+	std::vector<std::unique_ptr<Card>> lastPlayedCards;
 
 public:
 	/**
@@ -23,6 +23,8 @@ public:
 	* \param name : string
 	*/
 	explicit Player(const std::string& name);
+
+	void getDefuseCard(Deck& deck);
 
 	/**
 	* \brief Draw a card from the deck
@@ -59,7 +61,7 @@ public:
 	*/
 	void renderHand(sf::RenderWindow& window) const;
 	
-	void renderPlayedCard(sf::RenderWindow& window);
+	void renderPlayedCard(sf::RenderWindow& window) const;
 
 	void addPoints(int points) { score += points; };
 	int getScore() const{ return score; };

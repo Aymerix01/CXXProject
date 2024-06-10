@@ -12,6 +12,8 @@ class Deck : public EventCardListener
 {
 private:
 	std::vector<std::unique_ptr<Card>> cards;
+	std::unique_ptr<Card> defuseCard;
+	std::unique_ptr<Card> bombCard;
 	sf::Sprite deckSprite;
 	sf::Vector2f deckPosition = sf::Vector2f(125, 715);
 	EventCardManager& eventCardManager;
@@ -27,8 +29,11 @@ public:
 	* \brief Add a card to the deck
 	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
-	void buildCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
+	void buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger);
 
+	std::unique_ptr<Card> getDefuseCard();
+
+	void placeExplodingCard();
 	/**
 	* \brief Dump the deck
 	* \return string
