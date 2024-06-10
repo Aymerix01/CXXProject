@@ -17,6 +17,9 @@ private:
 	std::vector<std::unique_ptr<Card>> hand;
 	std::vector<std::unique_ptr<Card>> lastPlayedCards;
 
+	sf::Font fontScore;
+	sf::Text textScore;
+
 public:
 	/**
 	* \brief Constructor of the Player class
@@ -60,7 +63,7 @@ public:
 	* \param window : sf::RenderWindow&
 	*/
 	void renderHand(sf::RenderWindow& window) const;
-	
+	void renderScore(sf::RenderWindow& window);
 	void renderPlayedCard(sf::RenderWindow& window) const;
 
 	void addPoints(int points) { score += points; };

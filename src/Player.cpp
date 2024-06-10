@@ -1,12 +1,17 @@
 #include "Player.h"
 #include <iostream>
 #include <math.h>
+#include <format>
 
 using namespace std;
 
 Player::Player(const string& name) : 
 	playerName(name)
 {
+	fontScore.loadFromFile("media/Sansation.ttf");
+	textScore.setFont(fontScore);
+	textScore.setCharacterSize(50);
+	textScore.setPosition(900, 60);
 }
 
 void Player::getDefuseCard(Deck& deck) {
@@ -88,6 +93,12 @@ void Player::renderHand(sf::RenderWindow& window) const
 		card->render(window, position);
 		position.x += 800 / static_cast<float>(hand.size());
 	}
+}
+
+void Player::renderScore(sf::RenderWindow& window)
+{
+	textScore.setString(to_string(score));
+	window.draw(textScore);
 }
 
 void Player::renderPlayedCard(sf::RenderWindow& window) const
