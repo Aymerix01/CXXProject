@@ -35,11 +35,10 @@ void Game::run()
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
-
 			processEvents();
-			if(menuStateManager.inGame)
-				update(TimePerFrame);
 		}
+		if (menuStateManager.inGame)
+			update(TimePerFrame);
 		updateStatistics(elapsedTime);
 		render();
 	}

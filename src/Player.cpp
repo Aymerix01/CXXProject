@@ -80,7 +80,6 @@ void Player::renderHand(sf::RenderWindow& window) const
 	for (const auto& card : hand)
 	{
 		card->render(window, position);
-		cout << card->getClassType() << endl;
 		position.x += 200;
 	}
 }
