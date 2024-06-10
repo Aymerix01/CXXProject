@@ -115,6 +115,7 @@ void Game::render()
 	{
 		deck.render(mWindow);
 		player.renderHand(mWindow);
+		player.renderPlayedCard(mWindow);
 	}
 	mWindow.draw(mStatisticsText);
 	mWindow.display();

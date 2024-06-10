@@ -44,6 +44,7 @@ string Player::dump() const
 void Player::playCard(int index)
 {
 	hand[index]->play();
+	lastPlayedCard = move(hand[index]);
 	hand.erase(hand.begin() + index);
 }
 
@@ -75,13 +76,23 @@ bool Player::hasLost() const
 
 void Player::renderHand(sf::RenderWindow& window) const
 {
-	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 450), 715);
+	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 500), 715);
 	
 	for (const auto& card : hand)
 	{
 		card->render(window, position);
 		position.x += 200;
 	}
+}
+
+void Player::renderPlayedCard(sf::RenderWindow& window)
+{
+	if (lastPlayedCard != nullptr)
+	{
+		auto position = sf::Vector2f(static_cast<float>(window.getSize().x / 2), 300);
+		lastPlayedCard->render(window, position);
+	}
+	lastPlayedCard = nullptr;
 }
 
 void Player::onEventCard(EventCard eventCard)

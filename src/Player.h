@@ -15,6 +15,7 @@ private:
 	const std::string playerName;
 	int score = 0;
 	std::vector<std::unique_ptr<Card>> hand;
+	std::unique_ptr<Card> lastPlayedCard;
 
 public:
 	/**
@@ -57,6 +58,8 @@ public:
 	* \param window : sf::RenderWindow&
 	*/
 	void renderHand(sf::RenderWindow& window) const;
+	
+	void renderPlayedCard(sf::RenderWindow& window);
 
 	void addPoints(int points) { score += points; };
 	int getScore() const{ return score; };
