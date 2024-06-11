@@ -18,6 +18,8 @@ private:
 	sf::Vector2f deckPosition = sf::Vector2f(125, 715);
 	EventCardManager& eventCardManager;
 
+	bool renderTopCard = false;
+
 public:
 	/**
 	* \brief Constructor of the Deck class
@@ -85,7 +87,7 @@ public:
 	* \brief Render the deck
 	* \param window : sf::RenderWindow
 	*/
-	void render(sf::RenderWindow& window) const;
+	void render(sf::RenderWindow& window);
 
 	void onEventCard(EventCard eventCard) override;
 };

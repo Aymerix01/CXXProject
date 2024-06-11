@@ -91,6 +91,7 @@ void Game::userEvents(sf::Event event)
 
 void Game::update(sf::Time elapsedTime)
 {
+	player.hasLost(deck);
 	/*
 	if (!player.hasLost(deck))
 	{

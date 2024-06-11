@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <random> 
+#include <math.h>
 #include "ExplodingCard.h"
 #include "ShuffleCard.h"
 #include "HappyCard.h"
@@ -92,6 +93,7 @@ string Deck::attack()
 
 unique_ptr<Card> Deck::drawCard()
 {
+	renderTopCard = false;
 	if (!cards.empty()) {
 		auto card = move(cards.back());
 		cards.pop_back();
@@ -126,7 +128,7 @@ vector<Card*> Deck::showSomeCards(int nbCards)
 {
 	if (!cards.empty()) {
 		vector<Card*> res;
-		for (int i = 0; i < nbCards; i++) {
+		for (int i = 0; i < min(nbCards, static_cast<int>(cards.size())); i++) {
 			res.push_back(cards[cards.size() - i -1].get());
 		}
 		return res;
@@ -142,10 +144,16 @@ bool Deck::empty() const
 	return false;
 }
 
-void Deck::render(sf::RenderWindow& window) const
+void Deck::render(sf::RenderWindow& window)
 {
 	if(!cards.empty())
 		window.draw(deckSprite);
+	if (renderTopCard) {
+		std::vector<Card*> showCards = showSomeCards(3);
+		for (int i = 0; i < showCards.size(); i++) {
+			showCards[i]->render(window, sf::Vector2f(static_cast<float>(100 + i * 200), 75), sf::Vector2f(0.5, 0.5));
+		}
+	}
 }
 
 void Deck::onEventCard(EventCard eventCard) {
@@ -163,8 +171,7 @@ void Deck::onEventCard(EventCard eventCard) {
 		shuffle();
 	}
 	else if (eventCard == FUTURE) {
-		//Il y a un problème ici, il faut afficher les 3 cartes retournées
 		cout << "Deck: Future event card" << endl;
-		showSomeCards(3);
+		renderTopCard = true;
 	}
 }
