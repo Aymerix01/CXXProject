@@ -43,7 +43,6 @@ private:
 
 	int playerInput;
 
-	void onUserEvent(sf::Event event);
 	sf::Vector2i mousePos;
 	bool isMousePressed = false;
 };

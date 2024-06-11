@@ -17,6 +17,8 @@ void MenuPrincipal::render(sf::RenderWindow& window)
 void MenuPrincipal::onUserEvent(sf::Event event, sf::RenderWindow& window)
 {
 	if (event.type == sf::Event::MouseButtonPressed) {
+		std::cout << event.mouseButton.x << std::endl;
+		std::cout << event.mouseButton.y << std::endl;
 		if (event.mouseButton.x >= 780 && event.mouseButton.x <= 1136 &&
 			event.mouseButton.y >= 365 && event.mouseButton.y <= 605)
 		{

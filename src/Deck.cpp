@@ -167,5 +167,4 @@ void Deck::onEventCard(EventCard eventCard) {
 		cout << "Deck: Future event card" << endl;
 		showSomeCards(3);
 	}
-	
 }

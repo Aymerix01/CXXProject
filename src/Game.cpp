@@ -40,7 +40,7 @@ void Game::run()
 		if (menuStateManager.inGame)
 			update(TimePerFrame);
 		updateStatistics(elapsedTime);
-		onUserEvent(event);
+		//onUserEvent(event);
 		render();
 	}
 }
@@ -77,6 +77,13 @@ void Game::userEvents(sf::Event event)
 	}
 	else if (event.type == sf::Event::MouseButtonReleased) {
 		isMousePressed = false;
+	}
+	if (event.type == sf::Event::MouseButtonPressed) {
+		if (event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
+			event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
+		{
+			player.drawCard(deck);
+		}
 	}
 	menuStateManager.onUserEvent(event, mWindow);
 	mousePos = sf::Mouse::getPosition(mWindow);
@@ -149,18 +156,6 @@ void Game::updateStatistics(sf::Time elapsedTime)
 							 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
-	}
-}
-void Game::onUserEvent(sf::Event event)
-{
-	if (event.type == sf::Event::MouseButtonPressed) {
-		if (event.mouseButton.x >= 0 && event.mouseButton.x <= 1920 &&
-			event.mouseButton.y >= 0 && event.mouseButton.y <= 1080)
-		{
-			cout << event.mouseButton.x;
-			cout << event.mouseButton.y;
-			//player.drawCard(deck);
-		}
 	}
 }
 
