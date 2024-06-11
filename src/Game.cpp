@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "StringHelpers.hpp"
 #include <iostream>
+#include "MenuFin.h"
 
 using namespace std;
 
@@ -9,10 +10,11 @@ const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 Game::Game(const std::string& playerName, const pugi::xml_node& node,
 			const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
 			const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-			const sf::Sprite& deckSprite, EventCardManager& eventCardManager) : 
+			const sf::Sprite& menuFinSprite, const sf::Sprite& deckSprite,
+			EventCardManager& eventCardManager) :
 eventCardManager(eventCardManager), player(playerName), 
 deck(node, deckSprite, eventCardManager),
-menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite)
+menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite, menuFinSprite)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -91,42 +93,11 @@ void Game::userEvents(sf::Event event)
 
 void Game::update(sf::Time elapsedTime)
 {
-	player.hasLost(deck);
-	/*
-	if (!player.hasLost(deck))
-	{
-		cout << "Please choose an action" << endl;
-		cout << "0 : Draw card" << endl;
-		cout << "1 : Play card" << endl;
-		cin >> playerInput;
-		if (playerInput == 0)
-		{
-			player.drawCard(deck);
-			cout << "Your hand" << endl;
-			player.showHand();
-			player.hasLost(deck);
-		}
-		else if (playerInput == 1)
-		{
-			if (player.getHandLength() <= 0)
-			{
-				cout << "You don't have  a card to play" << endl;
-				playerInput = -1;
-			}
-			else
-			{
-				cout << "Your hand" << endl;
-				player.showHand();
-				cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
-				cin >> playerInput;
-				player.playCard(playerInput);
-			}
-		}
+	if (player.hasLost(deck)) {
+		menuStateManager.inGame = false;
+		menuStateManager.endGame = true;
+		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
 	}
-	else {
-		cout << "Game Over" << endl;
-	}
-	*/
 }
 
 void Game::render()
@@ -139,6 +110,10 @@ void Game::render()
 		player.renderHand(mWindow, mousePos, isMousePressed);
 		player.renderScore(mWindow);
 		player.renderPlayedCard(mWindow);
+	}
+	if (menuStateManager.endGame)
+	{
+		player.renderScoreEndGame(mWindow);
 	}
 	mWindow.draw(mStatisticsText);
 	mWindow.display();

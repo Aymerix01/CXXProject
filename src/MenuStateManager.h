@@ -15,7 +15,8 @@ private:
 
 public:
 	MenuStateManager(const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-					 const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite);
+					 const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
+					 const sf::Sprite& menuFinSprite);
 
 	void render(sf::RenderWindow& window);
 	void onUserEvent(sf::Event event, sf::RenderWindow& window);
@@ -25,7 +26,9 @@ public:
 	sf::Sprite menuPrincipalSprite;
 	sf::Sprite menuCartesSprite;
 	sf::Sprite menuPauseSprite;
+	sf::Sprite menuFinSprite;
 	sf::Text menuCartesText;
 	bool paused = false;
 	bool inGame = false;
+	bool endGame = false;
 };

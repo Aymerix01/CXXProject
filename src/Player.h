@@ -67,6 +67,7 @@ public:
 	*/
 	void renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool playerDragDrop);
 	void renderScore(sf::RenderWindow& window);
+	void renderScoreEndGame(sf::RenderWindow& window);
 	void renderPlayedCard(sf::RenderWindow& window) const;
 
 	void addPoints(int points) { score += points; };

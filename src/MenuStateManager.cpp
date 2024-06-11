@@ -2,9 +2,10 @@
 #include "MenuPrincipal.h"
 
 MenuStateManager::MenuStateManager(const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-								   const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite) :
+								   const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite, 
+								   const sf::Sprite& menuFinSprite) :
 	backgroundSprite(backgroundSprite), menuPrincipalSprite(menuPrincipalSprite),
-	menuCartesSprite(menuCartesSprite), menuPauseSprite(menuPauseSprite)
+	menuCartesSprite(menuCartesSprite), menuPauseSprite(menuPauseSprite), menuFinSprite(menuFinSprite)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	menuCartesText.setFont(mFont);

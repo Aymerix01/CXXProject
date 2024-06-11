@@ -12,7 +12,8 @@ public:
 	explicit Game(const std::string &playerName, const pugi::xml_node& node,
 				  const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
 				  const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-				  const sf::Sprite& deckSprite, EventCardManager& eventCardManager);
+				  const sf::Sprite& menuFinSprite, const sf::Sprite& deckSprite, 
+				  EventCardManager& eventCardManager);
 	void run();
 		
 private:

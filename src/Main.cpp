@@ -53,10 +53,17 @@ int myMain()
     sf::Sprite menuPauseSprite;
     menuPauseSprite.setTexture(textureMenuPause);
 
+    sf::Texture textureMenuFin;
+    if (!textureMenuFin.loadFromFile("resources/MenuEndGame.png")) {
+        printf("Error loading texture\n");
+    }
+    sf::Sprite menuFinSprite;
+    menuFinSprite.setTexture(textureMenuFin);
+
     EventCardManager eventCardManager;
 
 	Game game(string("Toto"), root, backgroundSprite, menuPrincipalSprite, menuCartesSprite,
-              menuPauseSprite, spriteDosCarte, eventCardManager);
+              menuPauseSprite, menuFinSprite, spriteDosCarte, eventCardManager);
     game.run();
 
 	return 0;

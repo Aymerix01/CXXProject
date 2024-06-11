@@ -132,14 +132,10 @@ void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool pl
 		index++;
 	}
 	if (!playerDragDrop && indexSelectedCard != -1 && mousePos.y < 400) {
-		//hand[indexSelectedCard] = move(selectedCard);
 		playCard(indexSelectedCard);
-		//selectedCard = nullptr;
 		indexSelectedCard = -1;
 	}
 	else if (!playerDragDrop && indexSelectedCard != -1) {
-		//hand[indexSelectedCard] = move(selectedCard);
-		//selectedCard = nullptr;
 		indexSelectedCard = -1;
 	}
 	else if (indexSelectedCard != -1) {
@@ -148,7 +144,6 @@ void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool pl
 		hand[indexSelectedCard]->render(window, { cardPosX, cardPosY }, { 1, 1} );
 	}
 	else if (playerDragDrop && cardHovered) {
-		//selectedCard = move(hand[indexCardHovered]);
 		indexSelectedCard = indexCardHovered;
 	}
 	else if (cardHovered)
@@ -161,6 +156,13 @@ void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool pl
 void Player::renderScore(sf::RenderWindow& window)
 {
 	textScore.setString(to_string(score));
+	window.draw(textScore);
+}
+
+void Player::renderScoreEndGame(sf::RenderWindow& window) {
+	textScore.setString(to_string(score));
+	textScore.setPosition(875, 300);
+	textScore.setCharacterSize(100);
 	window.draw(textScore);
 }
 
