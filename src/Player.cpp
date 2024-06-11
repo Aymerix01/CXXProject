@@ -95,14 +95,57 @@ bool Player::hasLost(Deck& deck)
 	return false;
 }
 
-void Player::renderHand(sf::RenderWindow& window) const
+void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool playerDragDrop)
 {
 	auto position = sf::Vector2f(static_cast<float>(window.getSize().x/2 - 475), 715);
 	
+	int indexCardHovered = -1;
+	int index = 0;
+	bool cardHovered = false;
 	for (const auto& card : hand)
 	{
-		card->render(window, position);
+		if (static_cast<float>(mousePos.x) >= position.x && 
+			static_cast<float>(mousePos.x) <= position.x + 800 / static_cast<float>(hand.size()) &&
+			static_cast<float>(mousePos.y) >= position.y &&
+			static_cast<float>(mousePos.y) <= position.y + 291)
+		{
+			indexCardHovered = index;
+			cardHovered = true;
+		}
+		else
+		{
+			if (index != indexSelectedCard)
+			{
+				card->render(window, position, { 1, 1 });
+			}
+		}
 		position.x += 800 / static_cast<float>(hand.size());
+		index++;
+	}
+	if (!playerDragDrop && selectedCard != nullptr && mousePos.y < 400) {
+		hand[indexSelectedCard] = move(selectedCard);
+		playCard(indexSelectedCard);
+		selectedCard = nullptr;
+		indexSelectedCard = -1;
+	}
+	else if (!playerDragDrop && selectedCard != nullptr) {
+		hand[indexSelectedCard] = move(selectedCard);
+		selectedCard = nullptr;
+		indexSelectedCard = -1;
+	}
+	else if (selectedCard != nullptr) {
+		float cardPosX = static_cast<float>(mousePos.x) - 50;
+		float cardPosY = static_cast<float>(mousePos.y) - 145;
+		selectedCard->render(window, { cardPosX, cardPosY }, { 1, 1} );
+	}
+	else if (playerDragDrop && cardHovered) {
+		selectedCard = move(hand[indexCardHovered]);
+		indexSelectedCard = indexCardHovered;
+	}
+	else if (cardHovered)
+	{
+		auto newPos = sf::Vector2f(static_cast<float>(window.getSize().x / 2 - 100), 600);
+		hand[indexCardHovered]->render(window, newPos, { 1.2f, 1.2f });
 	}
 }
 
@@ -114,11 +157,11 @@ void Player::renderScore(sf::RenderWindow& window)
 
 void Player::renderPlayedCard(sf::RenderWindow& window) const
 {
-	auto position = sf::Vector2f(static_cast<float>(window.getSize().x / 2 - 1000), 250);
+	auto position = sf::Vector2f(static_cast<float>(window.getSize().x / 2) - 1000.f, 250);
 	for(const auto& card : lastPlayedCards)
 	{
 		position.x += 1600 / static_cast<float>(lastPlayedCards.size() + 1);
-		card->render(window, position);
+		card->render(window, position, {1, 1});
 	}
 }
 
