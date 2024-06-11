@@ -55,11 +55,11 @@ TEST(Player, hasLost) {
 
     Player player("Jean Jacques");
     player.drawCard(deck);
-    EXPECT_TRUE(!player.hasLost());
+    EXPECT_TRUE(!player.hasLost(deck));
     player.drawCard(deck);
-    EXPECT_TRUE(player.hasLost());
+    EXPECT_TRUE(player.hasLost(deck));
     player.drawCard(deck);
-    EXPECT_TRUE(!player.hasLost());
+    EXPECT_TRUE(!player.hasLost(deck));
 }
 
 TEST(Card, playCard) {

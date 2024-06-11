@@ -71,11 +71,19 @@ void Game::userEvents(sf::Event event)
 	if (event.type == sf::Event::Closed) {
 		mWindow.close();
 	}
+	if (event.type == sf::Event::MouseButtonPressed) {
+		isMousePressed = true;
+	}
+	else if (event.type == sf::Event::MouseButtonReleased) {
+		isMousePressed = false;
+	}
 	menuStateManager.onUserEvent(event, mWindow);
+	mousePos = sf::Mouse::getPosition(mWindow);
 }
 
 void Game::update(sf::Time elapsedTime)
 {
+	/*
 	if (!player.hasLost(deck))
 	{
 		cout << "Please choose an action" << endl;
@@ -109,6 +117,7 @@ void Game::update(sf::Time elapsedTime)
 	else {
 		cout << "Game Over" << endl;
 	}
+	*/
 }
 
 void Game::render()
@@ -118,7 +127,7 @@ void Game::render()
 	if (menuStateManager.inGame)
 	{
 		deck.render(mWindow);
-		player.renderHand(mWindow);
+		player.renderHand(mWindow, mousePos, isMousePressed);
 		player.renderScore(mWindow);
 		player.renderPlayedCard(mWindow);
 	}

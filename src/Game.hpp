@@ -42,6 +42,8 @@ private:
 	MenuStateManager menuStateManager;
 
 	int playerInput;
+	sf::Vector2i mousePos;
+	bool isMousePressed = false;
 };
 
 #endif // BOOK_GAME_HPP

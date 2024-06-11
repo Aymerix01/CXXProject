@@ -22,8 +22,9 @@ std::string DefuseCard::getClassType() const
 	return classType;
 }
 
-void DefuseCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void DefuseCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	defuseCardSprite.setScale(size);
 	defuseCardSprite.setPosition(position);
 	window.draw(defuseCardSprite);
 }

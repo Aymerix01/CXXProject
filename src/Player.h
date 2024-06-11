@@ -17,6 +17,9 @@ private:
 	std::vector<std::unique_ptr<Card>> hand;
 	std::vector<std::unique_ptr<Card>> lastPlayedCards;
 
+	std::unique_ptr<Card> selectedCard;
+	int indexSelectedCard = -1;
+
 	sf::Font fontScore;
 	sf::Text textScore;
 
@@ -62,7 +65,7 @@ public:
 	* \brief Render the player's hand
 	* \param window : sf::RenderWindow&
 	*/
-	void renderHand(sf::RenderWindow& window) const;
+	void renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool playerDragDrop);
 	void renderScore(sf::RenderWindow& window);
 	void renderPlayedCard(sf::RenderWindow& window) const;
 

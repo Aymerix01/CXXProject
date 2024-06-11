@@ -23,8 +23,9 @@ std::string FutureCard::getClassType() const
 	return classType;
 }
 
-void FutureCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void FutureCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	futureCardSprite.setScale(size);
 	futureCardSprite.setPosition(position);
 	window.draw(futureCardSprite);
 }

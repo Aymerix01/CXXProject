@@ -24,8 +24,9 @@ std::string ShuffleCard::getClassType() const
 	return classType;
 }
 
-void ShuffleCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void ShuffleCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	shuffleCardSprite.setScale(size);
 	shuffleCardSprite.setPosition(position);
 	window.draw(shuffleCardSprite);
 }

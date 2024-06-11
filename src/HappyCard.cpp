@@ -29,8 +29,9 @@ std::string HappyCard::getClassType() const
 	return classType;
 }
 
-void HappyCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void HappyCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	happyCardSprite.setScale(size);
 	happyCardSprite.setPosition(position);
 	window.draw(happyCardSprite);
 }

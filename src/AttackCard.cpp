@@ -23,8 +23,9 @@ std::string AttackCard::getClassType() const
 	return classType;
 }
 
-void AttackCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void AttackCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	attackCardSprite.setScale(size);
 	attackCardSprite.setPosition(position);
 	window.draw(attackCardSprite);
 }

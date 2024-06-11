@@ -22,8 +22,9 @@ std::string ExplodingCard::getClassType() const
 	return classType;
 }
 
-void ExplodingCard::render(sf::RenderWindow& window, const sf::Vector2f& position)
+void ExplodingCard::render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size)
 {
+	explodingCardSprite.setScale(size);
 	explodingCardSprite.setPosition(position);
 	window.draw(explodingCardSprite);
 }

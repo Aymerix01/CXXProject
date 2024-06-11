@@ -71,6 +71,7 @@ TEST(Deck, shuffle) {
     EXPECT_TRUE(isValueInList(deck.dump(), possibilities));
 }
 
+
 TEST(Deck, drawCard) {
     EventCardManager eventCardManager;
     sf::Sprite sprite;
