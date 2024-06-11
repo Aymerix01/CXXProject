@@ -40,6 +40,7 @@ void Game::run()
 		if (menuStateManager.inGame)
 			update(TimePerFrame);
 		updateStatistics(elapsedTime);
+		onUserEvent(event);
 		render();
 	}
 }
@@ -141,3 +142,16 @@ void Game::updateStatistics(sf::Time elapsedTime)
 		mStatisticsNumFrames = 0;
 	}
 }
+void Game::onUserEvent(sf::Event event)
+{
+	if (event.type == sf::Event::MouseButtonPressed) {
+		if (event.mouseButton.x >= 0 && event.mouseButton.x <= 1920 &&
+			event.mouseButton.y >= 0 && event.mouseButton.y <= 1080)
+		{
+			cout << event.mouseButton.x;
+			cout << event.mouseButton.y;
+			//player.drawCard(deck);
+		}
+	}
+}
+

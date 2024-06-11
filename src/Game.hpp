@@ -42,6 +42,8 @@ private:
 	MenuStateManager menuStateManager;
 
 	int playerInput;
+
+	void onUserEvent(sf::Event event);
 };
 
 #endif // BOOK_GAME_HPP
