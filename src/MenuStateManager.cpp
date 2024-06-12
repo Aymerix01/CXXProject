@@ -1,7 +1,7 @@
 #include "MenuStateManager.h"
 #include "MenuPrincipal.h"
 
-MenuStateManager::MenuStateManager()
+MenuStateManager::MenuStateManager(EventCardManager& eventCardManager) : eventCardManager(eventCardManager)
 {
     if (!texturePlateau.loadFromFile("resources/TemplatePlateau.png")) {
         printf("Error loading texture\n");

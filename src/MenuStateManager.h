@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include "MenuState.h"
+#include "EventCardManager.h"
 
 class Deck;
 class Player;
@@ -20,7 +21,7 @@ private:
 	sf::Texture textureMenuFin;
 
 public:
-	MenuStateManager();
+	explicit MenuStateManager(EventCardManager& eventCardManager);
 
 	void render(sf::RenderWindow& window);
 	void onUserEvent(sf::Event event, sf::RenderWindow& window);
@@ -35,4 +36,6 @@ public:
 	bool paused = false;
 	bool inGame = false;
 	bool endGame = false;
+
+	EventCardManager& eventCardManager;
 };

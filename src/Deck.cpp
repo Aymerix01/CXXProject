@@ -21,13 +21,16 @@ Deck::Deck(EventCardManager& eventCardManager) :
 	}
 	deckSprite.setTexture(textureDosCarte);
 
-	pugi::xml_document doc;
 	if (auto result = doc.load_file("resources/Data.xml"); !result)
 	{
 		cerr << "Could not open file Data.xml because " << result.description() << endl;
 	}
-	pugi::xml_node root = doc.child("root");
+	root = doc.child("root");
 
+	buildDeck();
+}
+
+void Deck::buildDeck() {
 	deckSprite.setPosition(deckPosition);
 	pugi::xml_node n = root.first_child();
 	buildCard(n, eventCardManager);
@@ -186,4 +189,10 @@ void Deck::onEventCard(EventCard eventCard) {
 		cout << "Deck: Future event card" << endl;
 		renderTopCard = true;
 	}
+}
+
+void Deck::reset()
+{
+	cards.clear();
+	buildDeck();
 }

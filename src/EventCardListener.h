@@ -7,6 +7,7 @@ enum class EventCard
 	FUTURE,
 	HAPPYPOINTS,
 	ATTACKPOINTS,
+	RESET,
 };
 
 class EventCardListener 

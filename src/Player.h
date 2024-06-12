@@ -74,4 +74,6 @@ public:
 	int getScore() const{ return score; };
 	void onEventCard(EventCard eventCard) override;
 	auto getHandLength() const { return hand.size(); };
+
+	void reset();
 };

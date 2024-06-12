@@ -21,6 +21,7 @@ void MenuPrincipal::onUserEvent(sf::Event event, sf::RenderWindow& window)
 			event.mouseButton.y >= 365 && event.mouseButton.y <= 605)
 		{
 			m_manager.inGame = true;
+			m_manager.eventCardManager.notifyEventCardListeners(EventCard::RESET);
 			m_manager.changeState(std::make_unique<InGame>(m_manager));
 		}
 		else if (event.mouseButton.x >= 785 && event.mouseButton.x <= 1141 &&

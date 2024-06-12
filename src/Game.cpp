@@ -8,8 +8,8 @@ using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const std::string& playerName, EventCardManager& eventCardManager) :
-eventCardManager(eventCardManager), player(playerName), deck(eventCardManager)
+Game::Game(const std::string& playerName) :
+player(playerName), deck(eventCardManager), menuStateManager(eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -23,7 +23,6 @@ eventCardManager(eventCardManager), player(playerName), deck(eventCardManager)
 
 void Game::run()
 {
-	start();
 	sf::Clock clock;
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
@@ -91,6 +90,7 @@ void Game::userEvents(sf::Event event)
 void Game::update()
 {
 	if (player.hasLost(deck)) {
+		cout << "You lost" << endl;
 		menuStateManager.inGame = false;
 		menuStateManager.endGame = true;
 		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
@@ -137,6 +137,11 @@ void Game::onEventCard(EventCard eventCard) {
 		menuStateManager.inGame = false;
 		menuStateManager.endGame = true;
 		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
+	}
+	else if (eventCard == EventCard::RESET) {
+		deck.reset();
+		player.reset();
+		start();
 	}
 }
 

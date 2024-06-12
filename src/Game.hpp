@@ -10,7 +10,7 @@
 class Game : private sf::NonCopyable, public EventCardListener
 {
 public:
-	explicit Game(const std::string& playerName, EventCardManager& eventCardManager);
+	explicit Game(const std::string& playerName);
 	void run();
 		
 private:
@@ -34,7 +34,7 @@ private:
 	sf::Vector2f cardSize = sf::Vector2f(100, 150);
 	sf::Vector2f deckPosition = sf::Vector2f(100, 100);
 
-	EventCardManager& eventCardManager;
+	EventCardManager eventCardManager;
 	Player player;
 	Deck deck;
 

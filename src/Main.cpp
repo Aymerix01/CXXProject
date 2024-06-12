@@ -8,9 +8,7 @@ using namespace std;
 
 int myMain()
 {
-    EventCardManager eventCardManager;
-
-	Game game(string("Toto"), eventCardManager);
+	Game game(string("Toto"));
     game.run();
 
 	return 0;

@@ -14,13 +14,14 @@ void MenuFin::render(sf::RenderWindow& window)
 
 void MenuFin::onUserEvent(sf::Event event, sf::RenderWindow& window)
 {
-	if (event.type == sf::Event::MouseButtonPressed)
+	if (event.type == sf::Event::MouseButtonPressed && 
+		event.mouseButton.x >= 825 && event.mouseButton.x <= 1100 &&
+		event.mouseButton.y >= 776 && event.mouseButton.y <= 958)
 	{
-		if (event.mouseButton.x >= 825 && event.mouseButton.x <= 1100 &&
-			event.mouseButton.y >= 776 && event.mouseButton.y <= 958)
-		{
-			m_manager.endGame = false;
-			m_manager.changeState(std::make_unique<MenuPrincipal>(m_manager));
-		}
+		
+		std::cout << "Retour au menu principal" << std::endl;
+		m_manager.endGame = false;
+		m_manager.changeState(std::make_unique<MenuPrincipal>(m_manager));
+		
 	}
 }

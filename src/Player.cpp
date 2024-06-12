@@ -188,4 +188,13 @@ void Player::onEventCard(EventCard eventCard)
 	}
 }
 
+void Player::reset()
+{
+	textScore.setCharacterSize(50);
+	textScore.setPosition(900, 60);
+	hand.clear();
+	lastPlayedCards.clear();
+	score = 0;
+}
+
 
