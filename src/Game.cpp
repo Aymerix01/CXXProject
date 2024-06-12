@@ -1,19 +1,15 @@
 #include "Game.hpp"
 #include "StringHelpers.hpp"
 #include <iostream>
+#include "MenuFin.h"
 
 
 using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const std::string& playerName, const pugi::xml_node& node,
-			const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-			const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-			const sf::Sprite& deckSprite, EventCardManager& eventCardManager) : 
-eventCardManager(eventCardManager), player(playerName), 
-deck(node, deckSprite, eventCardManager),
-menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite)
+Game::Game(const std::string& playerName, EventCardManager& eventCardManager) :
+eventCardManager(eventCardManager), player(playerName), deck(eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -22,6 +18,7 @@ menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPa
 
 	this->eventCardManager.addEventCardListener(&player);
 	this->eventCardManager.addEventCardListener(&deck);
+	this->eventCardManager.addEventCardListener(this);
 }
 
 void Game::run()
@@ -39,9 +36,8 @@ void Game::run()
 			processEvents();
 		}
 		if (menuStateManager.inGame)
-			update(TimePerFrame);
+			update();
 		updateStatistics(elapsedTime);
-		//onUserEvent(event);
 		render();
 	}
 }
@@ -80,54 +76,25 @@ void Game::userEvents(sf::Event event)
 	else if (event.type == sf::Event::MouseButtonReleased) {
 		isMousePressed = false;
 	}
-	if (event.type == sf::Event::MouseButtonPressed) {
-		if (event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
-			event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
-		{
-			player.drawCard(deck);
-		}
+	if (event.type == sf::Event::MouseButtonPressed && 
+		event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
+		event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
+	{
+		
+		player.drawCard(deck);
+		
 	}
 	menuStateManager.onUserEvent(event, mWindow);
 	mousePos = sf::Mouse::getPosition(mWindow);
 }
 
-void Game::update(sf::Time elapsedTime)
+void Game::update()
 {
-	/*
-	if (!player.hasLost(deck))
-	{
-		cout << "Please choose an action" << endl;
-		cout << "0 : Draw card" << endl;
-		cout << "1 : Play card" << endl;
-		cin >> playerInput;
-		if (playerInput == 0)
-		{
-			player.drawCard(deck);
-			cout << "Your hand" << endl;
-			player.showHand();
-			player.hasLost(deck);
-		}
-		else if (playerInput == 1)
-		{
-			if (player.getHandLength() <= 0)
-			{
-				cout << "You don't have  a card to play" << endl;
-				playerInput = -1;
-			}
-			else
-			{
-				cout << "Your hand" << endl;
-				player.showHand();
-				cout << "Choose a card to play from 0-" << player.getHandLength() - 1 << endl;
-				cin >> playerInput;
-				player.playCard(playerInput);
-			}
-		}
+	if (player.hasLost(deck)) {
+		menuStateManager.inGame = false;
+		menuStateManager.endGame = true;
+		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
 	}
-	else {
-		cout << "Game Over" << endl;
-	}
-	*/
 }
 
 void Game::render()
@@ -140,6 +107,10 @@ void Game::render()
 		player.renderHand(mWindow, mousePos, isMousePressed);
 		player.renderScore(mWindow);
 		player.renderPlayedCard(mWindow);
+	}
+	if (menuStateManager.endGame)
+	{
+		player.renderScoreEndGame(mWindow);
 	}
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
@@ -158,6 +129,14 @@ void Game::updateStatistics(sf::Time elapsedTime)
 							 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
+	}
+}
+
+void Game::onEventCard(EventCard eventCard) {
+	if (eventCard == EventCard::ATTACKPOINTS) {
+		menuStateManager.inGame = false;
+		menuStateManager.endGame = true;
+		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
 	}
 }
 

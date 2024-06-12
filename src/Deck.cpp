@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <random> 
+#include <math.h>
 #include "ExplodingCard.h"
 #include "ShuffleCard.h"
 #include "HappyCard.h"
@@ -12,13 +13,25 @@
 
 using namespace std;
 
-Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager) :
-	deckSprite(sprite), eventCardManager(eventCardManager)
+Deck::Deck(EventCardManager& eventCardManager) :
+	eventCardManager(eventCardManager)
 {
+	if (!textureDosCarte.loadFromFile("resources/DosCarte.png")) {
+		printf("Error loading texture\n");
+	}
+	deckSprite.setTexture(textureDosCarte);
+
+	pugi::xml_document doc;
+	if (auto result = doc.load_file("resources/Data.xml"); !result)
+	{
+		cerr << "Could not open file Data.xml because " << result.description() << endl;
+	}
+	pugi::xml_node root = doc.child("root");
+
 	deckSprite.setPosition(deckPosition);
-	pugi::xml_node n = node.first_child();
+	pugi::xml_node n = root.first_child();
 	buildCard(n, eventCardManager);
-	while (n != node.last_child()) {
+	while (n != root.last_child()) {
 		n = n.next_sibling();
 		buildCard(n, eventCardManager);
 	}
@@ -92,6 +105,7 @@ string Deck::attack()
 
 unique_ptr<Card> Deck::drawCard()
 {
+	renderTopCard = false;
 	if (!cards.empty()) {
 		auto card = move(cards.back());
 		cards.pop_back();
@@ -116,8 +130,8 @@ void Deck::addCardToRandom(unique_ptr<Card> card)
 void Deck::moveFirstCardToRandom()
 {
 	if (!cards.empty()) {
-		auto card = move(cards[0]);
-		cards.erase(cards.begin());
+		auto card = move(cards[cards.size()-1]);
+		cards.pop_back();
 		addCardToRandom(move(card));
 	}
 }
@@ -126,7 +140,7 @@ vector<Card*> Deck::showSomeCards(int nbCards)
 {
 	if (!cards.empty()) {
 		vector<Card*> res;
-		for (int i = 0; i < nbCards; i++) {
+		for (int i = 0; i < min(nbCards, static_cast<int>(cards.size())); i++) {
 			res.push_back(cards[cards.size() - i -1].get());
 		}
 		return res;
@@ -142,10 +156,16 @@ bool Deck::empty() const
 	return false;
 }
 
-void Deck::render(sf::RenderWindow& window) const
+void Deck::render(sf::RenderWindow& window)
 {
 	if(!cards.empty())
 		window.draw(deckSprite);
+	if (renderTopCard) {
+		std::vector<Card*> showCards = showSomeCards(3);
+		for (int i = 0; i < showCards.size(); i++) {
+			showCards[i]->render(window, sf::Vector2f(static_cast<float>(100 + i * 200), 75), sf::Vector2f(0.5, 0.5));
+		}
+	}
 }
 
 void Deck::onEventCard(EventCard eventCard) {
@@ -163,8 +183,7 @@ void Deck::onEventCard(EventCard eventCard) {
 		shuffle();
 	}
 	else if (eventCard == FUTURE) {
-		//Il y a un problème ici, il faut afficher les 3 cartes retournées
 		cout << "Deck: Future event card" << endl;
-		showSomeCards(3);
+		renderTopCard = true;
 	}
 }

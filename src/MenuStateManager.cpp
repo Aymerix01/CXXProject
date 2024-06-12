@@ -1,11 +1,33 @@
 #include "MenuStateManager.h"
 #include "MenuPrincipal.h"
 
-MenuStateManager::MenuStateManager(const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-								   const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite) :
-	backgroundSprite(backgroundSprite), menuPrincipalSprite(menuPrincipalSprite),
-	menuCartesSprite(menuCartesSprite), menuPauseSprite(menuPauseSprite)
+MenuStateManager::MenuStateManager()
 {
+    if (!texturePlateau.loadFromFile("resources/TemplatePlateau.png")) {
+        printf("Error loading texture\n");
+    }
+    backgroundSprite.setTexture(texturePlateau);
+
+    if (!textureMenuPrincipal.loadFromFile("resources/FondMenuPrincipal.png")) {
+        printf("Error loading texture\n");
+    }
+    menuPrincipalSprite.setTexture(textureMenuPrincipal);
+
+    if (!textureMenuCartes.loadFromFile("resources/MenuCartes.png")) {
+        printf("Error loading texture\n");
+    }
+    menuCartesSprite.setTexture(textureMenuCartes);
+
+    if (!textureMenuPause.loadFromFile("resources/MenuPause.png")) {
+        printf("Error loading texture\n");
+    }
+    menuPauseSprite.setTexture(textureMenuPause);
+
+    if (!textureMenuFin.loadFromFile("resources/MenuEndGame.png")) {
+        printf("Error loading texture\n");
+    }
+    menuFinSprite.setTexture(textureMenuFin);
+
 	mFont.loadFromFile("media/Sansation.ttf");
 	menuCartesText.setFont(mFont);
 	menuCartesText.setPosition(370.f, 493.f);

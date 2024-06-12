@@ -88,7 +88,16 @@ bool Player::hasLost(Deck& deck)
 		}
 		index++;
 	}
-	if (getExplodingCard && !getDefuseCard)
+	if (getExplodingCard && getDefuseCard)
+	{
+		cout << "Remove exploding card and defuse card from hand" << endl;
+		auto explodingCard = move(hand[indexExplodingCard]);
+		deck.addCardToRandom(move(explodingCard));
+		hand.erase(hand.begin() + max(indexExplodingCard, indexDefuseCard));
+		hand.erase(hand.begin() + min(indexExplodingCard, indexDefuseCard));
+		return false;
+	}
+	else if (getExplodingCard && !getDefuseCard)
 	{
 		return true;
 	}
@@ -122,24 +131,19 @@ void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool pl
 		position.x += 800 / static_cast<float>(hand.size());
 		index++;
 	}
-	if (!playerDragDrop && selectedCard != nullptr && mousePos.y < 400) {
-		hand[indexSelectedCard] = move(selectedCard);
+	if (!playerDragDrop && indexSelectedCard != -1 && mousePos.y < 400) {
 		playCard(indexSelectedCard);
-		selectedCard = nullptr;
 		indexSelectedCard = -1;
 	}
-	else if (!playerDragDrop && selectedCard != nullptr) {
-		hand[indexSelectedCard] = move(selectedCard);
-		selectedCard = nullptr;
+	else if (!playerDragDrop && indexSelectedCard != -1) {
 		indexSelectedCard = -1;
 	}
-	else if (selectedCard != nullptr) {
+	else if (indexSelectedCard != -1) {
 		float cardPosX = static_cast<float>(mousePos.x) - 50;
 		float cardPosY = static_cast<float>(mousePos.y) - 145;
-		selectedCard->render(window, { cardPosX, cardPosY }, { 1, 1} );
+		hand[indexSelectedCard]->render(window, { cardPosX, cardPosY }, { 1, 1} );
 	}
 	else if (playerDragDrop && cardHovered) {
-		selectedCard = move(hand[indexCardHovered]);
 		indexSelectedCard = indexCardHovered;
 	}
 	else if (cardHovered)
@@ -152,6 +156,13 @@ void Player::renderHand(sf::RenderWindow& window, sf::Vector2i mousePos, bool pl
 void Player::renderScore(sf::RenderWindow& window)
 {
 	textScore.setString(to_string(score));
+	window.draw(textScore);
+}
+
+void Player::renderScoreEndGame(sf::RenderWindow& window) {
+	textScore.setString(to_string(score));
+	textScore.setPosition(875, 300);
+	textScore.setCharacterSize(100);
 	window.draw(textScore);
 }
 

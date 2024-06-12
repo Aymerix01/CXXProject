@@ -14,16 +14,19 @@ private:
 	std::vector<std::unique_ptr<Card>> cards;
 	std::unique_ptr<Card> defuseCard;
 	std::unique_ptr<Card> bombCard;
+	sf::Texture textureDosCarte;
 	sf::Sprite deckSprite;
 	sf::Vector2f deckPosition = sf::Vector2f(125, 715);
 	EventCardManager& eventCardManager;
+
+	bool renderTopCard = false;
 
 public:
 	/**
 	* \brief Constructor of the Deck class
 	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
-	explicit Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager);
+	explicit Deck(EventCardManager& eventCardManager);
 
 	/**
 	* \brief Add a card to the deck
@@ -85,7 +88,7 @@ public:
 	* \brief Render the deck
 	* \param window : sf::RenderWindow
 	*/
-	void render(sf::RenderWindow& window) const;
+	void render(sf::RenderWindow& window);
 
 	void onEventCard(EventCard eventCard) override;
 };
