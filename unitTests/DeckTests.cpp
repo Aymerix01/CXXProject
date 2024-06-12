@@ -27,7 +27,7 @@ TEST(Deck, Constructeur) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     std::string expected = "Baby Boom\nDynamite\nTNT\n";
     EXPECT_EQ(deck.dump(), expected);
@@ -40,7 +40,7 @@ TEST(Deck, showSomeCards) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     auto cards = deck.showSomeCards(3);
     std::string expected = "TNT\nDynamite\nBaby Boom\n";
@@ -58,7 +58,7 @@ TEST(Deck, shuffle) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     deck.shuffle();
     std::vector<std::string> possibilities = { "Baby Boom\nDynamite\nTNT\n",
@@ -79,7 +79,7 @@ TEST(Deck, drawCard) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     //On vérifie que la carte tirée est bien la première de la liste
     auto drawC = deck.drawCard()->getName();
@@ -98,7 +98,7 @@ TEST(Deck, addCardToRandom) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     const std::string xmlCard = R"(<?xml version = "1.0"?>
 						   <root>
@@ -125,7 +125,7 @@ TEST(Deck, empty) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     EXPECT_FALSE(deck.empty());
     deck.drawCard();

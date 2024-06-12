@@ -9,18 +9,14 @@
 class Game : private sf::NonCopyable, public EventCardListener
 {
 public:
-	explicit Game(const std::string &playerName, const pugi::xml_node& node,
-				  const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-				  const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-				  const sf::Sprite& menuFinSprite, const sf::Sprite& deckSprite, 
-				  EventCardManager& eventCardManager);
+	explicit Game(const std::string& playerName, EventCardManager& eventCardManager);
 	void run();
 		
 private:
 	void start();
 	void processEvents(); // Handle user input
 	void userEvents(sf::Event event);
-	void update(sf::Time elapsedTime);
+	void update();
 	void render();
 	void updateStatistics(sf::Time elapsedTime);
 	void onEventCard(EventCard eventCard) override;
@@ -42,8 +38,6 @@ private:
 	Deck deck;
 
 	MenuStateManager menuStateManager;
-
-	int playerInput;
 
 	sf::Vector2i mousePos;
 	bool isMousePressed = false;

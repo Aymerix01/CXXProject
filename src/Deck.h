@@ -14,6 +14,7 @@ private:
 	std::vector<std::unique_ptr<Card>> cards;
 	std::unique_ptr<Card> defuseCard;
 	std::unique_ptr<Card> bombCard;
+	sf::Texture textureDosCarte;
 	sf::Sprite deckSprite;
 	sf::Vector2f deckPosition = sf::Vector2f(125, 715);
 	EventCardManager& eventCardManager;
@@ -25,7 +26,7 @@ public:
 	* \brief Constructor of the Deck class
 	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
-	explicit Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager);
+	explicit Deck(EventCardManager& eventCardManager);
 
 	/**
 	* \brief Add a card to the deck

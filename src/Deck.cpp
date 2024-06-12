@@ -13,13 +13,25 @@
 
 using namespace std;
 
-Deck::Deck(const pugi::xml_node& node, const sf::Sprite& sprite, EventCardManager& eventCardManager) :
-	deckSprite(sprite), eventCardManager(eventCardManager)
+Deck::Deck(EventCardManager& eventCardManager) :
+	eventCardManager(eventCardManager)
 {
+	if (!textureDosCarte.loadFromFile("resources/DosCarte.png")) {
+		printf("Error loading texture\n");
+	}
+	deckSprite.setTexture(textureDosCarte);
+
+	pugi::xml_document doc;
+	if (auto result = doc.load_file("resources/Data.xml"); !result)
+	{
+		cerr << "Could not open file Data.xml because " << result.description() << endl;
+	}
+	pugi::xml_node root = doc.child("root");
+
 	deckSprite.setPosition(deckPosition);
-	pugi::xml_node n = node.first_child();
+	pugi::xml_node n = root.first_child();
 	buildCard(n, eventCardManager);
-	while (n != node.last_child()) {
+	while (n != root.last_child()) {
 		n = n.next_sibling();
 		buildCard(n, eventCardManager);
 	}

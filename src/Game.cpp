@@ -7,14 +7,8 @@ using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
 
-Game::Game(const std::string& playerName, const pugi::xml_node& node,
-			const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-			const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-			const sf::Sprite& menuFinSprite, const sf::Sprite& deckSprite,
-			EventCardManager& eventCardManager) :
-eventCardManager(eventCardManager), player(playerName), 
-deck(node, deckSprite, eventCardManager),
-menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPauseSprite, menuFinSprite)
+Game::Game(const std::string& playerName, EventCardManager& eventCardManager) :
+eventCardManager(eventCardManager), player(playerName), deck(eventCardManager)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -41,9 +35,8 @@ void Game::run()
 			processEvents();
 		}
 		if (menuStateManager.inGame)
-			update(TimePerFrame);
+			update();
 		updateStatistics(elapsedTime);
-		//onUserEvent(event);
 		render();
 	}
 }
@@ -81,18 +74,19 @@ void Game::userEvents(sf::Event event)
 	else if (event.type == sf::Event::MouseButtonReleased) {
 		isMousePressed = false;
 	}
-	if (event.type == sf::Event::MouseButtonPressed) {
-		if (event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
-			event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
-		{
-			player.drawCard(deck);
-		}
+	if (event.type == sf::Event::MouseButtonPressed && 
+		event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
+		event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
+	{
+		
+		player.drawCard(deck);
+		
 	}
 	menuStateManager.onUserEvent(event, mWindow);
 	mousePos = sf::Mouse::getPosition(mWindow);
 }
 
-void Game::update(sf::Time elapsedTime)
+void Game::update()
 {
 	if (player.hasLost(deck)) {
 		menuStateManager.inGame = false;

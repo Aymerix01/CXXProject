@@ -23,7 +23,7 @@ TEST(Player, drawCard) {
     pugi::xml_parse_result result = doc.load_string(s.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     //vérifie que drawCard() ajoute bien une carte à la main du joueur
     Player player("Jean Jacques");
@@ -51,7 +51,7 @@ TEST(Player, hasLost) {
     pugi::xml_parse_result result = doc.load_string(str.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     Player player("Jean Jacques");
     player.drawCard(deck);
@@ -77,7 +77,7 @@ TEST(Card, playCard) {
     pugi::xml_parse_result result = doc.load_string(str.c_str());
     ASSERT_TRUE(result) << result.description();
     pugi::xml_node root = doc.child("root");
-    Deck deck(root, sprite, eventCardManager);
+    Deck deck(sprite, eventCardManager);
 
     Player player("Jean Jacques");
 

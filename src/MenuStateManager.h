@@ -13,10 +13,14 @@ private:
 	std::unique_ptr<MenuState> menuState;
 	sf::Font mFont;
 
+	sf::Texture texturePlateau;
+	sf::Texture textureMenuPrincipal;
+	sf::Texture textureMenuCartes;
+	sf::Texture textureMenuPause;
+	sf::Texture textureMenuFin;
+
 public:
-	MenuStateManager(const sf::Sprite& backgroundSprite, const sf::Sprite& menuPrincipalSprite,
-					 const sf::Sprite& menuCartesSprite, const sf::Sprite& menuPauseSprite,
-					 const sf::Sprite& menuFinSprite);
+	MenuStateManager();
 
 	void render(sf::RenderWindow& window);
 	void onUserEvent(sf::Event event, sf::RenderWindow& window);
