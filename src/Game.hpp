@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Deck.h"
 #include "MenuStateManager.h"
+#include <AudioManager.h>
 
 class Game : private sf::NonCopyable
 {
@@ -45,6 +46,9 @@ private:
 
 	sf::Vector2i mousePos;
 	bool isMousePressed = false;
+
+	//AudioManager am;
+	
 };
 
 #endif // BOOK_GAME_HPP

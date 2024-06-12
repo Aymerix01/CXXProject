@@ -2,6 +2,7 @@
 #include "StringHelpers.hpp"
 #include <iostream>
 
+
 using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f/60.f);
@@ -47,6 +48,7 @@ void Game::run()
 
 void Game::start()
 {
+	//am.playMusic(0);
 	deck.shuffle();
 	for (int i = 0; i < nbCardPlayerinitial; i++)
 	{

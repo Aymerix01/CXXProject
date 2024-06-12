@@ -1,7 +1,7 @@
 
 add_executable(mainLauncher mainLauncher.cpp)
 
-target_link_libraries(mainLauncher PUBLIC src pugixml sfml-graphics)
+target_link_libraries(mainLauncher PUBLIC src pugixml sfml-graphics sfml-audio)
 
 add_custom_target(copy-resources ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/resources)
 add_custom_command(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/resources
