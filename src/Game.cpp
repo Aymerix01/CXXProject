@@ -23,6 +23,7 @@ menuStateManager(backgroundSprite, menuPrincipalSprite, menuCartesSprite, menuPa
 
 	this->eventCardManager.addEventCardListener(&player);
 	this->eventCardManager.addEventCardListener(&deck);
+	this->eventCardManager.addEventCardListener(this);
 }
 
 void Game::run()
@@ -132,6 +133,14 @@ void Game::updateStatistics(sf::Time elapsedTime)
 							 
 		mStatisticsUpdateTime -= sf::seconds(1.0f);
 		mStatisticsNumFrames = 0;
+	}
+}
+
+void Game::onEventCard(EventCard eventCard) {
+	if (eventCard == EventCard::ATTACKPOINTS) {
+		menuStateManager.inGame = false;
+		menuStateManager.endGame = true;
+		menuStateManager.changeState(make_unique<MenuFin>(menuStateManager));
 	}
 }
 

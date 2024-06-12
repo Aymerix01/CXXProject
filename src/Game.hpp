@@ -6,7 +6,7 @@
 #include "Deck.h"
 #include "MenuStateManager.h"
 
-class Game : private sf::NonCopyable
+class Game : private sf::NonCopyable, public EventCardListener
 {
 public:
 	explicit Game(const std::string &playerName, const pugi::xml_node& node,
@@ -23,6 +23,7 @@ private:
 	void update(sf::Time elapsedTime);
 	void render();
 	void updateStatistics(sf::Time elapsedTime);
+	void onEventCard(EventCard eventCard) override;
 
 	static const sf::Time	TimePerFrame;
 	sf::RenderWindow		mWindow{sf::VideoMode{1920, 1080}, "SFML Application", sf::Style::Close};

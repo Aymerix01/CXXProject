@@ -118,8 +118,8 @@ void Deck::addCardToRandom(unique_ptr<Card> card)
 void Deck::moveFirstCardToRandom()
 {
 	if (!cards.empty()) {
-		auto card = move(cards[0]);
-		cards.erase(cards.begin());
+		auto card = move(cards[cards.size()-1]);
+		cards.pop_back();
 		addCardToRandom(move(card));
 	}
 }
