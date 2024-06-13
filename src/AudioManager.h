@@ -4,8 +4,13 @@
 
 class AudioManager {
 private:
-	std::vector<sf::Music> osts;
+	std::vector<std::unique_ptr<sf::Music>> osts;
+	std::vector<std::unique_ptr<sf::SoundBuffer>> sfxBuffers;
 	std::vector<sf::Sound> sfx;
+	
+	//SFX1 is CardPlayed
+	//SFX2 is CardShuffle
+	//SFX3 is BabyLaugh
 
 public:
 	explicit AudioManager();
