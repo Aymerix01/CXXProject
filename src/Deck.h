@@ -26,20 +26,32 @@ private:
 public:
 	/**
 	* \brief Constructor of the Deck class
-	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
+	* \param evntCrdMngr : const EventCardManager&
 	*/
 	explicit Deck(EventCardManager& eventCardManager);
 
+	/**
+	* \brief Build the deck
+	*/
 	void buildDeck();
+
 	/**
 	* \brief Add a card to the deck
 	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
 	*/
 	void buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger);
 
+	/**
+	* \brief Get the defuse card
+	* \return unique_ptr<Card>
+	*/
 	std::unique_ptr<Card> getDefuseCard();
 
+	/**
+	* \brief Place the exploding card in the deck
+	*/
 	void placeExplodingCard();
+
 	/**
 	* \brief Dump the deck
 	* \return string
@@ -52,13 +64,7 @@ public:
 	void shuffle();
 
 	/**
-	* Puts the first card of the deck in the back
-	* if the card is a bomb then the player gains points
-	*/
-	std::string attack();
-
-	/**
-	* \brief Draw the last card from the deck (cards.back())
+	* \brief Draw the first card from the deck (cards.back())
 	* \return unique_ptr<Card>
 	*/
 	std::unique_ptr<Card> drawCard();
@@ -70,7 +76,7 @@ public:
 	void addCardToRandom(std::unique_ptr<Card> card);
 
 	/**
-	* \brief Move the first card of the deck to a random position
+	* \brief Move the first card (cards.back()) of the deck to a random position
 	*/
 	void moveFirstCardToRandom();
 
@@ -93,7 +99,14 @@ public:
 	*/
 	void render(sf::RenderWindow& window);
 
+	/**
+	* \brief Observer pattern method
+	* \param eventCard : EventCard
+	*/
 	void onEventCard(EventCard eventCard) override;
 
+	/**
+	* \brief Reset the deck
+	*/
 	void reset();
 };

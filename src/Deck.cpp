@@ -93,19 +93,6 @@ void Deck::shuffle()
 	std::ranges::shuffle(cards.begin(), cards.end(), g);
 }
 
-string Deck::attack()
-{
-	if (!cards.empty()) {
-		auto card = move(cards.back());
-		auto str = card->getClassType();
-		cards.pop_back();
-		addCardToRandom(move(card));
-
-		return str;
-	}
-	return " ";
-}
-
 unique_ptr<Card> Deck::drawCard()
 {
 	renderTopCard = false;
