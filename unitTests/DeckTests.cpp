@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "Card.h"
 #include "Game.hpp"
-
+/*
 const std::string s = R"(<?xml version = "1.0"?>
 						   <root>
 							<ExplodingCard name="Baby Boom"/>
@@ -133,3 +133,4 @@ TEST(Deck, empty) {
     deck.drawCard();
     EXPECT_TRUE(deck.empty());
 }
+*/

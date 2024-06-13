@@ -6,6 +6,7 @@ using namespace std;
 
 AudioManager::AudioManager()
 {
+	//osts.reserve(6);
 	std::string songToOpen;
 	for (int i = 1; i <= 6; i++)
 	{
