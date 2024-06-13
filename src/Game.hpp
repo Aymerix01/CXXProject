@@ -23,7 +23,7 @@ private:
 	void onEventCard(EventCard eventCard) override;
 
 	static const sf::Time	TimePerFrame;
-	sf::RenderWindow		mWindow{sf::VideoMode{1920, 1080}, "SFML Application", sf::Style::Close};
+	sf::RenderWindow		mWindow{sf::VideoMode{1910, 1050}, "SFML Application", sf::Style::Close};
 	sf::Texture				mTexture;
 	sf::Font				mFont;
 	sf::Text				mStatisticsText;
