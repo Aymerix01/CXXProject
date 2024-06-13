@@ -10,7 +10,11 @@ private:
 	
 	//SFX1 is CardPlayed
 	//SFX2 is CardShuffle
-	//SFX3 is BabyLaugh
+	//SFX3 is BabyLaugh (attack)
+	//SFX4 is Defuse
+	//SFX5 is Explosion
+	//SFX6 is Future
+	//SFX7 is Happy
 
 public:
 	explicit AudioManager();

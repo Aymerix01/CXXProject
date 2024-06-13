@@ -21,9 +21,9 @@ AudioManager::AudioManager()
 		}
 	}
 
-	sfxBuffers.reserve(3);
-	sfx.reserve(3);
-	for (int i = 1; i <= 3; i++)
+	sfxBuffers.reserve(7);
+	sfx.reserve(7);
+	for (int i = 1; i <= 7; i++)
 	{
 		auto buffer = std::make_unique<sf::SoundBuffer>();
 		std::string sfxFile = std::format("resources/SFX{}.mp3", i);
