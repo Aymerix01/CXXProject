@@ -47,6 +47,14 @@ https://github.com/Aymerix01/CXXProject/assets/123820772/c3c9f4c6-d81c-4828-9f07
 
 ## Diagramme de classes
 
+### Simplifié
+
 <p align="center">
-	<img src="readmeResources/DiagrammeClasse.png">
+	<img src="readmeResources/DiagrammeClassSimplifie.png">
+</p>
+
+### Détaillé
+
+<p align="center">
+	<img src="readmeResources/DiagrammeClass2.png">
 </p>
