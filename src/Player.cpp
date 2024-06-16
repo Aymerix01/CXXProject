@@ -24,6 +24,7 @@ void Player::getExplodingCard(Deck& deck) {
 
 void Player::drawCard(Deck& deck)
 {
+	am.playSFX(0);
 	lastPlayedCards.clear();
 	if(!deck.empty())
 	{ 
@@ -57,6 +58,7 @@ string Player::dump() const
 
 void Player::playCard(int index)
 {
+	am.playSFX(0);
 	hand[index]->play();
 	lastPlayedCards.push_back(move(hand[index]));
 	hand.erase(hand.begin() + index);
@@ -73,6 +75,7 @@ bool Player::hasLost(Deck& deck)
 	{
 		if (getExplodingCard && getDefuseCard)
 		{
+			am.playSFX(3);
 			cout << "Remove exploding card and defuse card from hand" << endl;
 			auto explodingCard = move(hand[indexExplodingCard]);
 			deck.addCardToRandom(move(explodingCard));

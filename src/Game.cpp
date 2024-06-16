@@ -43,7 +43,7 @@ void Game::run()
 
 void Game::start()
 {
-	am.playMusic(0);
+	am.playMusic();
 	deck.shuffle();
 	for (int i = 0; i < nbCardPlayerinitial; i++)
 	{
@@ -89,7 +89,13 @@ void Game::userEvents(sf::Event event)
 
 void Game::update()
 {
+	if (am.hasSongEnded())
+	{
+		am.incrementSongToPlay();
+		am.playMusic();
+	}
 	if (player.hasLost(deck)) {
+		am.playSFX(4);
 		cout << "You lost" << endl;
 		menuStateManager.inGame = false;
 		menuStateManager.endGame = true;

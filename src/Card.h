@@ -5,6 +5,7 @@
 #include <pugixml.hpp>
 #include <memory>
 #include "EventCardManager.h"
+#include "AudioManager.h"
 
 class Deck;
 class Card

@@ -6,6 +6,7 @@
 #include <memory>
 #include "Deck.h"
 #include "EventCardListener.h"
+#include "AudioManager.h"
 
 class Card;
 class Game;
@@ -22,6 +23,8 @@ private:
 
 	sf::Font fontScore;
 	sf::Text textScore;
+
+	AudioManager am;
 
 public:
 	/**

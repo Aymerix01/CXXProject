@@ -41,14 +41,14 @@ AudioManager::AudioManager()
 	}
 }
 
-void AudioManager::playMusic(int i)
+void AudioManager::playMusic()
 {
-	if (i >= 0 && i < osts.size() && osts[i])
+	if (songPlaying >= 0 && songPlaying < osts.size() && osts[songPlaying])
 	{
-		osts[i]->play();
+		osts[songPlaying]->play();
 	}
 	else {
-		cout << "Invalid music index: " << i << endl;
+		cout << "Invalid music index: " << songPlaying << endl;
 	}
 	
 }
@@ -62,5 +62,21 @@ void AudioManager::playSFX(int i)
 	else
 	{
 		cout << "Invalid SFX index: " << i << endl;
+	}
+}
+
+bool AudioManager::hasSongEnded()
+{
+	return osts[songPlaying]->getStatus() == sf::SoundSource::Stopped;
+}
+
+void AudioManager::incrementSongToPlay()
+{
+	if (songPlaying <= 5) 
+	{
+		songPlaying += 1; 
+	}
+	else {
+		songPlaying = 0;
 	}
 }

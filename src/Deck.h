@@ -7,6 +7,7 @@
 #include "Card.h"
 #include "EventCardListener.h"
 #include "EventCardManager.h"
+#include "AudioManager.h"
 
 class Deck : public EventCardListener
 {
@@ -22,6 +23,7 @@ private:
 	EventCardManager& eventCardManager;
 
 	bool renderTopCard = false;
+	AudioManager am;
 
 public:
 	/**

@@ -91,6 +91,7 @@ string Deck::dump() const
 
 void Deck::shuffle()
 {
+	am.playSFX(1);
 	std::random_device rd;
 	std::mt19937 g(rd());
 
@@ -132,6 +133,7 @@ void Deck::moveFirstCardToRandom()
 
 vector<Card*> Deck::showSomeCards(int nbCards)
 {
+	am.playSFX(5);
 	if (!cards.empty()) {
 		vector<Card*> res;
 		for (int i = 0; i < min(nbCards, static_cast<int>(cards.size())); i++) {
@@ -167,6 +169,7 @@ void Deck::onEventCard(EventCard eventCard) {
 	if (eventCard == ATTACK) {
 		cout << "Deck: Attack event card" << endl;
 		if (cards[cards.size() - 1]->getClassType() == "ExplodingCard") {
+			am.playSFX(2);
 			cout << "Deck: Player gains points" << endl;
 			eventCardManager.notifyEventCardListeners(EventCard::ATTACKPOINTS);
 		}
