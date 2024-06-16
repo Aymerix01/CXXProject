@@ -10,8 +10,8 @@ HappyCard::HappyCard(const pugi::xml_node& node, EventCardManager& eventCardMana
 {
 	std::ostringstream ostringstreamSpritePath;
 	ostringstreamSpritePath << "resources/HappyCard-" << string(node.attribute("name").as_string()) << ".png";
-	std::string spritePath = ostringstreamSpritePath.str();
-	if (!happyCardTexture.loadFromFile(spritePath))
+	if (std::string spritePath = ostringstreamSpritePath.str(); 
+		!happyCardTexture.loadFromFile(spritePath))
 	{
 		std::cerr << "Error loading texture" << std::endl;
 	}

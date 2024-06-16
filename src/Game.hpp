@@ -10,7 +10,15 @@
 class Game : private sf::NonCopyable, public EventCardListener
 {
 public:
+	/**
+	* \Brief Constructor of the Game
+	* \param playerName The name of the player
+	*/
 	explicit Game(const std::string& playerName);
+
+	/**
+	* \Brief Run the game
+	*/
 	void run();
 		
 private:

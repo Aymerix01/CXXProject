@@ -13,6 +13,10 @@ private:
 	sf::Sprite defuseCardSprite;
 	sf::Texture defuseCardTexture;
 public:
+	/**
+	* \brief Constructor of DefuseCard
+	* \param node : const pugi::xml_node&, eventCardManager : EventCardManager&
+	*/
 	explicit DefuseCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;

@@ -1,6 +1,5 @@
 #pragma once
 
-//#include "SFML/Graphics.hpp"
 #include <vector>
 #include <memory>
 #include <pugixml.hpp>
@@ -28,7 +27,7 @@ private:
 public:
 	/**
 	* \brief Constructor of the Deck class
-	* \param evntCrdMngr : const EventCardManager&
+	* \param evntCrdMngr : EventCardManager&
 	*/
 	explicit Deck(EventCardManager& eventCardManager);
 
@@ -39,7 +38,7 @@ public:
 
 	/**
 	* \brief Add a card to the deck
-	* \param node : pugi::xml_node, evntCrdMngr : const EventCardManager&
+	* \param node : pugi::xml_node, evntCrdMngr : EventCardManager&
 	*/
 	void buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger);
 

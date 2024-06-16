@@ -13,6 +13,10 @@ private:
 	sf::Sprite shuffleCardSprite;
 	sf::Texture shuffleCardTexture;
 public:
+	/**
+	* \brief Constructor of ShuffleCard
+	* \param node : const pugi::xml_node&, eventCardManager : EventCardManager&
+	*/
 	explicit ShuffleCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;

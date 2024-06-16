@@ -12,6 +12,10 @@ private:
 	sf::Sprite explodingCardSprite;
 	sf::Texture explodingCardTexture;
 public:
+	/**
+	* \brief Constructor of ExplodingCard
+	* \param node : const pugi::xml_node&, eventCardManager : EventCardManager&
+	*/
 	explicit ExplodingCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;

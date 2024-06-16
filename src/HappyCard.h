@@ -14,6 +14,10 @@ private:
 	sf::Sprite happyCardSprite;
 	sf::Texture happyCardTexture;
 public:
+	/**
+	* \brief Constructor of HappyCard
+	* \param node : const pugi::xml_node&, eventCardManager : EventCardManager&
+	*/
 	explicit HappyCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;

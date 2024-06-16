@@ -13,6 +13,10 @@ private:
 	sf::Sprite futureCardSprite;
 	sf::Texture futureCardTexture;
 public:
+	/**
+	* \brief Constructor of FutureCard
+	* \param node : const pugi::xml_node&, eventCardManager : EventCardManager&
+	*/
 	explicit FutureCard(const pugi::xml_node& node, EventCardManager& eventCardManager);
 	void play() override;
 	std::string getClassType() const override;
