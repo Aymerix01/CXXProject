@@ -43,7 +43,7 @@ void Game::run()
 
 void Game::start()
 {
-	//am.playMusic(0);
+	am.playMusic(0);
 	deck.shuffle();
 	for (int i = 0; i < nbCardPlayerinitial; i++)
 	{

@@ -43,7 +43,7 @@ private:
 	sf::Vector2i mousePos;
 	bool isMousePressed = false;
 
-	//AudioManager am;
+	AudioManager am;
 	
 };
 
