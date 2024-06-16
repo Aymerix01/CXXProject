@@ -10,35 +10,35 @@ private:
 	int songPlaying = 0; //Current song that is playing
 
 public:
-	/*
-	* Constructor that builds osts, sfxBuffers and sfx
+	/**
+	* \brief Constructor that builds osts, sfxBuffers and sfx
 	*/
 	explicit AudioManager();
 
-	/*
-	* Plays the current song defined by songPlaying
+	/**
+	* \brief Plays the current song defined by songPlaying
 	*/
 	void playMusic(); 
 	
-	/*
-	* Plays the correspoding sfx : SFX(i+1)
-	*	SFX1 is CardPlayed ok
-	*	SFX2 is CardShuffle ok
-	*	SFX3 is BabyLaugh (attack) ok
-	*	SFX4 is Defuse ok
-	*	SFX5 is Explosion ok
-	*	SFX6 is Future ok
-	*	SFX7 is Happy
+	/**
+	* \brief Plays the correspoding sfx : SFX(i+1)
+	* \brief SFX1 is CardPlayed ok
+	* \brief SFX2 is CardShuffle ok
+	* \brief SFX3 is BabyLaugh (attack) ok
+	* \brief SFX4 is Defuse ok
+	* \brief SFX5 is Explosion ok
+	* \brief SFX6 is Future ok
+	* \brief SFX7 is Happy
 	*/
 	void playSFX(int i);
 	
-	/*
-	* Returns wheter or not the current song has ended
+	/**
+	* \brief Returns wheter or not the current song has ended
 	*/
 	bool hasSongEnded();
 
-	/*
-	* Passes to the next song
+	/**
+	* \brief Passes to the next song
 	*/
 	void incrementSongToPlay(); 
 };
