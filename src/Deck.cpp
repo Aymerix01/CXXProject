@@ -72,6 +72,10 @@ unique_ptr<Card> Deck::getDefuseCard() {
 	return move(defuseCard);
 }
 
+unique_ptr<Card> Deck::getExplodingCard() {
+	return move(bombCard);
+}
+
 void Deck::placeExplodingCard() {
 	addCardToRandom(move(bombCard));
 }
