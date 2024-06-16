@@ -18,6 +18,10 @@ void Player::getDefuseCard(Deck& deck) {
 	hand.push_back(deck.getDefuseCard());
 }
 
+void Player::getExplodingCard(Deck& deck) {
+	hand.push_back(deck.getExplodingCard());
+}
+
 void Player::drawCard(Deck& deck)
 {
 	lastPlayedCards.clear();

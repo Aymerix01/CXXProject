@@ -48,6 +48,12 @@ public:
 	std::unique_ptr<Card> getDefuseCard();
 
 	/**
+	* \brief Get the exploding card
+	* \return unique_ptr<Card>
+	*/
+	std::unique_ptr<Card> getExplodingCard();
+
+	/**
 	* \brief Place the exploding card in the deck
 	*/
 	void placeExplodingCard();

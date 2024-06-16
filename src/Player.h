@@ -37,6 +37,12 @@ public:
 	void getDefuseCard(Deck& deck);
 
 	/**
+	* \brief Get the exxploding card
+	* \param deck : Deck&
+	*/
+	void getExplodingCard(Deck& deck);
+
+	/**
 	* \brief Draw a card from the deck
 	* \param deck : Deck&
 	*/

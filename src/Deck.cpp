@@ -10,14 +10,14 @@
 #include "DefuseCard.h"
 #include "FutureCard.h"
 
-
 using namespace std;
 
 Deck::Deck(EventCardManager& eventCardManager) :
 	eventCardManager(eventCardManager)
 {
-	if (!textureDosCarte.loadFromFile("resources/DosCarte.png")) {
-		printf("Error loading texture\n");
+	if (!textureDosCarte.loadFromFile("resources/DosCarte.png") )
+	{
+			printf("Error loading texture\n");
 	}
 	deckSprite.setTexture(textureDosCarte);
 
@@ -70,6 +70,10 @@ void Deck::buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger)
 
 unique_ptr<Card> Deck::getDefuseCard() {
 	return move(defuseCard);
+}
+
+unique_ptr<Card> Deck::getExplodingCard() {
+	return move(bombCard);
 }
 
 void Deck::placeExplodingCard() {
