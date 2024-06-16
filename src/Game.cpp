@@ -79,7 +79,7 @@ void Game::userEvents(sf::Event event)
 		event.mouseButton.x >= 192 && event.mouseButton.x <= 370 &&
 		event.mouseButton.y >= 710 && event.mouseButton.y <= 924)
 	{
-		
+		am.playSFX(0);
 		player.drawCard(deck);
 		
 	}

@@ -24,7 +24,6 @@ void Player::getExplodingCard(Deck& deck) {
 
 void Player::drawCard(Deck& deck)
 {
-	am.playSFX(0);
 	lastPlayedCards.clear();
 	if(!deck.empty())
 	{ 
