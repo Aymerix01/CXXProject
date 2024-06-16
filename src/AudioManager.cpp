@@ -26,7 +26,7 @@ AudioManager::AudioManager()
 	for (int i = 1; i <= 7; i++)
 	{
 		auto buffer = std::make_unique<sf::SoundBuffer>();
-		std::string sfxFile = std::format("resources/SFX{}.mp3", i);
+		std::string sfxFile = std::format("resources/SFX{}.ogg", i);
 		if (!buffer->loadFromFile(sfxFile))
 		{
 			cout << "Sound effect: " << sfxFile << " Cannot be Loaded" << endl;
