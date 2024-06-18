@@ -61,3 +61,13 @@
     <img src="readmeResources/DosCarte.webp" width="100" style="margin-right: 10px;">
     <span>Cette image utilisée dans ce projet est fournie par <a href="https://hearthstone.blizzard.com/fr-fr">Hearthstone</a> et est sous licence <a href="https://www.fandom.com/fr/licensing-fr">CC-BY-SA</a>. Vous pouvez la trouver <a href="https://hearthstone.fandom.com/fr/wiki/Dos_de_carte">ici</a>.</span>
 </p>
+
+Audio source : 
+SFX :
+https://pixabay.com/sound-effects/search/magical/
+Valorant defuse
+https://pixabay.com/fr/sound-effects/card-sounds-35956/
+https://pixabay.com/fr/sound-effects/shuffle-cards-46455/
+
+Music :
+https://www.youtube.com/watch?v=PEI2zet48Uc&ab_channel=DrSaxLove
