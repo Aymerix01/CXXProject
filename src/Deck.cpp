@@ -3,12 +3,7 @@
 #include <algorithm>
 #include <random> 
 #include <math.h>
-#include "ExplodingCard.h"
-#include "ShuffleCard.h"
 #include "HappyCard.h"
-#include "AttackCard.h"
-#include "DefuseCard.h"
-#include "FutureCard.h"
 
 using namespace std;
 

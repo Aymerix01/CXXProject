@@ -3,7 +3,6 @@
 #include <memory>
 #include <sstream>
 #include "Deck.h"
-#include "ExplodingCard.h"
 #include "pugixml.hpp"
 #include "Player.h"
 #include "Card.h"
@@ -93,7 +92,7 @@ TEST(Deck, addCardToRandom) {
     pugi::xml_parse_result result2 = cardNode.load_string(xmlCard.c_str());
     ASSERT_TRUE(result2) << result2.description();
     pugi::xml_node cardRoot = cardNode.child("root");
-    auto c = std::make_unique<ExplodingCard>(cardRoot.first_child(), eventCardManager);
+    auto c = std::make_unique<Card>(cardRoot.first_child(), eventCardManager);
     deck.addCardToRandom(move(c));
 
     std::vector<std::string> possibilities = {

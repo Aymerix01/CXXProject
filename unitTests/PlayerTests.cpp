@@ -3,7 +3,6 @@
 #include <memory>
 #include <sstream>
 #include "Deck.h"
-#include "ExplodingCard.h"
 #include "pugixml.hpp"
 #include "Player.h"
 #include "Card.h"
