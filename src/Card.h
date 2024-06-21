@@ -28,7 +28,7 @@ public:
 	/**
 	* \brief Play a card
 	*/
-	virtual void play();
+	void play();
 
 	/**
 	* \brief Send message to every listener
@@ -46,15 +46,10 @@ public:
 	* \brief Get the class type of the card
 	* \return std::string
 	*/
-	virtual std::string getClassType() const;
+	std::string getClassType() const;
 
 	/**
 	* \brief Render the card
 	*/
-	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size);
-
-	/**
-	* \brief Destructor of Card
-	*/
-	virtual ~Card() = default;
+	void render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size);
 };

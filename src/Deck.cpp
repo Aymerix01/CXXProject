@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <random> 
 #include <math.h>
-#include "HappyCard.h"
 
 using namespace std;
 

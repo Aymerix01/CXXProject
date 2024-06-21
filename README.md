@@ -50,11 +50,11 @@ https://github.com/Aymerix01/CXXProject/assets/123820772/c3c9f4c6-d81c-4828-9f07
 ### Simplifié
 
 <p align="center">
-	<img src="readmeResources/DiagrammeClassSimplifie.png">
+	<img src="readmeResources/DiagrammeClassSimplifie2.png">
 </p>
 
 ### Détaillé
 
 <p align="center">
-	<img src="readmeResources/DiagrammeClass2.png">
+	<img src="readmeResources/DiagrammeClass3.png">
 </p>
