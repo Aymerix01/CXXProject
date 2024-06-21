@@ -42,25 +42,25 @@ void Deck::buildDeck() {
 
 void Deck::buildCard(const pugi::xml_node& node, EventCardManager& evntCrdMnger) {
 	if (string(node.name()) == "ExplodingCard") {
-		bombCard = make_unique<ExplodingCard>(node, evntCrdMnger);
+		bombCard = make_unique<Card>(node, evntCrdMnger);
 	}
 	else if (string(node.name()) == "AttackCard") {
-		auto c = make_unique<AttackCard>(node, evntCrdMnger);
+		auto c = make_unique<Card>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "DefuseCard") {
-		defuseCard = make_unique<DefuseCard>(node, evntCrdMnger);
+		defuseCard = make_unique<Card>(node, evntCrdMnger);
 	}
 	else if (string(node.name()) == "FutureCard") {
-		auto c = make_unique<FutureCard>(node, evntCrdMnger);
+		auto c = make_unique<Card>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "ShuffleCard") {
-		auto c = make_unique<ShuffleCard>(node, evntCrdMnger);
+		auto c = make_unique<Card>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else if (string(node.name()) == "HappyCard") {
-		auto c = make_unique<HappyCard>(node, evntCrdMnger);
+		auto c = make_unique<Card>(node, evntCrdMnger);
 		cards.push_back(move(c));
 	}
 	else {

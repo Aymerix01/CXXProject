@@ -11,8 +11,11 @@ class Deck;
 class Card
 {
 private:
+	std::string classType;
 	std::string name;
 	EventCardManager& eventCardManager;
+	sf::Sprite cardSprite;
+	sf::Texture cardTexture;
 
 public:
 
@@ -25,7 +28,7 @@ public:
 	/**
 	* \brief Play a card
 	*/
-	virtual void play() = 0;
+	virtual void play();
 
 	/**
 	* \brief Send message to every listener
@@ -43,12 +46,12 @@ public:
 	* \brief Get the class type of the card
 	* \return std::string
 	*/
-	virtual std::string getClassType() const = 0;
+	virtual std::string getClassType() const;
 
 	/**
 	* \brief Render the card
 	*/
-	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size) = 0;
+	virtual void render(sf::RenderWindow& window, const sf::Vector2f& position, const sf::Vector2f& size);
 
 	/**
 	* \brief Destructor of Card

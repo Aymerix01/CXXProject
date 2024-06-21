@@ -60,7 +60,7 @@ TEST(Deck, drawCard) {
     //On vérifie que la carte tirée précédemment n'est plus dans le deck
     //A savoir que l'on a également retiré les cartes "Baby Boom" et "Babysous" du deck
     //Pour pas que le joueur puisse les piocher au début de la partie 
-    expected = R"(Babyg Brother
+    expected = R"(BabygBrother
 Babycyclette
 Babytcoin
 BabyShark
@@ -97,25 +97,25 @@ TEST(Deck, addCardToRandom) {
     deck.addCardToRandom(move(c));
 
     std::vector<std::string> possibilities = {
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nBabytcoin\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nBabycyclette\nTest\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Babyg Brother\nTest\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
-  "Test\nBabyg Brother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n"
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nTest\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nTest\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nTest\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nTest\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nBabytcoin\nTest\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nBabycyclette\nTest\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "BabygBrother\nTest\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n",
+  "Test\nBabygBrother\nBabycyclette\nBabytcoin\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\nBabyShark\nBabyfoot\nBabybel\nBabysounours\nBabybron\n"
   };
     EXPECT_TRUE(isValueInList(deck.dump(), possibilities));
 }
